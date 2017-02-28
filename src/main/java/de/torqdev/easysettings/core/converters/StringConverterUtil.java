@@ -1,8 +1,6 @@
 package de.torqdev.easysettings.core.converters;
 
 import de.torqdev.easysettings.core.EasySettingsException;
-import de.torqdev.easysettings.core.converters.FileStringConverter;
-import de.torqdev.easysettings.core.converters.LocaleStringConverter;
 import javafx.util.StringConverter;
 import javafx.util.converter.BigDecimalStringConverter;
 import javafx.util.converter.BigIntegerStringConverter;
