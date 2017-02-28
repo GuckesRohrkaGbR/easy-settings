@@ -1,7 +1,5 @@
 package de.torqdev.easysettings.core;
 
-import java.io.IOException;
-
 /**
  * @author Christopher Guckes (christopher.guckes@torq-dev.de)
  * @version 1.0
