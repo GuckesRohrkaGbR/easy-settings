@@ -1,8 +1,8 @@
 package de.torqdev.easysettings.gui.javafx;
 
 import de.torqdev.easysettings.core.EasySettingsException;
+import de.torqdev.easysettings.core.Setting;
 import de.torqdev.easysettings.core.Settings;
-import de.torqdev.easysettings.core.Settings.Setting;
 import javafx.geometry.Insets;
 import javafx.scene.Node;
 import javafx.scene.control.Button;

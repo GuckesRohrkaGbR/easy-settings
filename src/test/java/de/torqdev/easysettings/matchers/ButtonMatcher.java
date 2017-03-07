@@ -8,6 +8,8 @@ import org.hamcrest.Matcher;
 import static org.testfx.matcher.base.GeneralMatchers.typeSafeMatcher;
 
 /**
+ * Right now we need this matcher, because
+ *
  * @author <a href="mailto:christopher.guckes@torq-dev.de">Christopher Guckes</a>
  * @version 1.0
  */

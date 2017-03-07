@@ -1,7 +1,7 @@
 package de.torqdev.easysettings.gui.javafx;
 
+import de.torqdev.easysettings.core.Setting;
 import de.torqdev.easysettings.core.Settings;
-import de.torqdev.easysettings.core.Settings.Setting;
 import de.torqdev.easysettings.matchers.ChoiceBoxMatcher;
 import de.torqdev.easysettings.matchers.SliderMatcher;
 import javafx.application.Platform;

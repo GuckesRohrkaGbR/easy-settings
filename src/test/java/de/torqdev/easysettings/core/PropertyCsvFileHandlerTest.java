@@ -1,6 +1,5 @@
 package de.torqdev.easysettings.core;
 
-import de.torqdev.easysettings.core.Settings.Setting;
 import de.torqdev.easysettings.core.converters.FileStringConverter;
 import de.torqdev.easysettings.core.converters.StringConverterUtil;
 import de.torqdev.easysettings.core.io.PropertiesHandler;
