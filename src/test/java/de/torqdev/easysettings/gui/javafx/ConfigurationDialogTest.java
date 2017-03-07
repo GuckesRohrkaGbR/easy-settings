@@ -76,15 +76,11 @@ public class ConfigurationDialogTest extends ApplicationTest {
         openDialogButton.setId("testButton");
         openDialogButton.setOnAction(event -> {
             Optional<Settings> newSettings = testObject.showAndWait();
-            if (newSettings.isPresent()) {
-                resultSettings = newSettings.get();
-            }
+            newSettings.ifPresent(settings -> resultSettings = settings);
         });
         Button closeApplicationButton = new Button("Close");
         closeApplicationButton.setId("closeButton");
-        closeApplicationButton.setOnAction(event -> {
-            stage.fireEvent(new WindowEvent(stage, WindowEvent.WINDOW_CLOSE_REQUEST));
-        });
+        closeApplicationButton.setOnAction(event -> stage.fireEvent(new WindowEvent(stage, WindowEvent.WINDOW_CLOSE_REQUEST)));
         HBox hBox = new HBox();
         hBox.getChildren().addAll(openDialogButton, closeApplicationButton);
         root.getChildren().add(hBox);
@@ -105,9 +101,9 @@ public class ConfigurationDialogTest extends ApplicationTest {
         settings.addSetting(STRING_SETTING, new Setting<>("StringSample", String.class));
         settings.addSetting(RANGE_SETTING, new Setting<>(1.0, Double.class, 0.0, 2.0));
         settings.addSetting(CHOICE_SETTING, new Setting<>("Sel 3", String.class,
-            Arrays.asList("Sel 1", "Sel 2",
-                "Sel 3")));
-        settings.addSetting(FILE_SETTING, new Setting<>(new File(System.getProperty("java.io.tmpdir")), File.class));
+                Arrays.asList("Sel 1", "Sel 2",
+                        "Sel 3")));
+        settings.addSetting(FILE_SETTING, new Setting<>(new File("/file/path"), File.class));
 
         Platform.runLater(() -> testObject = new ConfigurationDialog(settings));
         clickOn("#testButton");
@@ -137,14 +133,12 @@ public class ConfigurationDialogTest extends ApplicationTest {
         LinkedList<String> myReturn = new LinkedList<>();
 
         final int[] idx = {0};
-        testObject.getDialogPane().getChildren().forEach(node -> {
-            ((Parent) node).getChildrenUnmodifiable().forEach(node1 -> {
-                if (node1 instanceof Label) {
-                    myReturn.add(idx[0], ((Label) node1).getText());
-                    idx[0]++;
-                }
-            });
-        });
+        testObject.getDialogPane().getChildren().forEach(node -> ((Parent) node).getChildrenUnmodifiable().forEach(node1 -> {
+            if (node1 instanceof Label) {
+                myReturn.add(idx[0], ((Label) node1).getText());
+                idx[0]++;
+            }
+        }));
 
         return myReturn;
     }
@@ -158,7 +152,7 @@ public class ConfigurationDialogTest extends ApplicationTest {
     @Test
     public void stringSettingIsDisplayedAsATextField() throws Exception {
         verifyThat("StringSample",
-            TextInputControlMatchers.hasText(containsString("StringSample")));
+                TextInputControlMatchers.hasText(containsString("StringSample")));
     }
 
     @Test
@@ -182,7 +176,8 @@ public class ConfigurationDialogTest extends ApplicationTest {
 
     @Test
     public void fileChooserIsDisplayedCorrectly() throws Exception {
-        verifyThat(System.getProperty("java.io.tmpdir"), isVisible());
+        verifyThat(STR.getString("open.file"), isNotNull());
+        verifyThat(STR.getString("open.file"), isVisible());
     }
 
     @Test
@@ -194,7 +189,7 @@ public class ConfigurationDialogTest extends ApplicationTest {
 
         checkResultSettingsValidity();
         assertThat(resultSettings.getSettings().get(STRING_SETTING).getValue().toString(),
-            containsString(testString));
+                containsString(testString));
     }
 
     @Test
@@ -221,7 +216,7 @@ public class ConfigurationDialogTest extends ApplicationTest {
 
         checkResultSettingsValidity();
         assertThat(resultSettings.getSettings().get(RANGE_SETTING).getValue().toString(),
-            containsString("2.0"));
+                containsString("2.0"));
     }
 
     @Test
@@ -233,7 +228,7 @@ public class ConfigurationDialogTest extends ApplicationTest {
 
         checkResultSettingsValidity();
         assertThat(resultSettings.getSettings().get(CHOICE_SETTING).getValue().toString(),
-            containsString("Sel 2"));
+                containsString("Sel 2"));
     }
 
     private void checkResultSettingsValidity() {
@@ -243,7 +238,7 @@ public class ConfigurationDialogTest extends ApplicationTest {
 
     @Test
     public void savingFileOptionWorks() throws Exception {
-        Optional<Label> label = lookup(System.getProperty("java.io.tmpdir")).tryQuery();
+        Optional<Label> label = lookup((new File("/file/path").getPath())).tryQuery();
         assertTrue(label.isPresent());
 
         if (label.isPresent()) {
@@ -262,14 +257,14 @@ public class ConfigurationDialogTest extends ApplicationTest {
         clickOn(isLabeled(STR.getString("save")));
 
         checkResultSettingsValidity();
-        assertThat(resultSettings.getSettings().get(FILE_SETTING).getValue().toString(), containsString("/new/file"));
+        assertThat(resultSettings.getSettings().get(FILE_SETTING).getValue().toString(), containsString((new File("/new/file")).getPath()));
     }
 
     @Test
     public void rangeOptionShowsMinMaxAndCurrentValue() throws Exception {
         Optional<Slider> slider = lookup(SliderMatcher.fromTo(0.0, 2.0)).tryQuery();
-        assertTrue(slider.isPresent());
 
+        assert slider.isPresent();
         Slider testSlider = slider.get();
         assertTrue(testSlider.isShowTickLabels());
 

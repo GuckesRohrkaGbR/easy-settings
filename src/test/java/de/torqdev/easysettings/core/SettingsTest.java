@@ -37,4 +37,9 @@ public class SettingsTest {
 
         assertEquals(setting, testObject.get(SETTING_NAME));
     }
+
+    @Test
+    public void savingDoesntCrashIfThereIsNoHandlerRegistered() throws Exception {
+        testObject.save();
+    }
 }

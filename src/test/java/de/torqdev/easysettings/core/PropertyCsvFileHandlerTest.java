@@ -57,6 +57,7 @@ public class PropertyCsvFileHandlerTest {
 
     @After
     public void tearDown() throws Exception {
+        //noinspection ResultOfMethodCallIgnored
         testFile.delete();
     }
 

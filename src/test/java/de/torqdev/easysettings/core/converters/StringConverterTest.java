@@ -3,8 +3,6 @@ package de.torqdev.easysettings.core.converters;
 import javafx.util.StringConverter;
 import org.junit.Test;
 
-import java.io.File;
-
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
 
