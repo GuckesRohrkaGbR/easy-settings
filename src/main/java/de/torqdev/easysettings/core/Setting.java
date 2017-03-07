@@ -11,7 +11,8 @@ import static de.torqdev.easysettings.core.SettingType.*;
 import static org.apache.commons.lang.StringUtils.defaultString;
 
 /**
- * Created by chris on 07.03.17.
+ * @author <a href="mailto:christopher.guckes@torq-dev.de">Christopher Guckes</a>
+ * @version 1.0
  */
 public class Setting<T> {
     private final String helpMessage;
@@ -22,6 +23,8 @@ public class Setting<T> {
     private final T maxValue;
     private final List<T> choices;
 
+
+    /// TODO: Make this a builder pattern, just look at the mess you made...
     public Setting(final T value, final Class<T> valueType) {
         this(value, valueType, valueType.equals(File.class) ? FILE : UNBOUNDED, null, null,
                 null, null);
