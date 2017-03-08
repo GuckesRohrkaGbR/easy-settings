@@ -11,7 +11,8 @@ import static org.junit.Assert.*;
  * @version 1.0
  */
 public class SettingsTest {
-    public static final String SETTING_NAME = "SettingName";
+    private static final String SETTING_NAME = "SettingName";
+    private static final SettingBuilder builder = new SettingBuilder();
 
     private Settings testObject;
 
@@ -22,7 +23,11 @@ public class SettingsTest {
 
     @Test
     public void addingSettingsWorks() throws Exception {
-        Setting<String> setting = new Setting<>("DefaultValue", String.class);
+        Setting setting = builder
+                .<String>unboundedSetting()
+                .forType(String.class)
+                .defaultValue("DefaultValue")
+                .build();
 
         testObject.addSetting(SETTING_NAME, setting);
 
@@ -31,7 +36,11 @@ public class SettingsTest {
 
     @Test
     public void settingsCanBeFetchedByName() throws Exception {
-        Setting<String> setting = new Setting<>("DefaultValue", String.class);
+        Setting<String> setting = builder
+                .<String>unboundedSetting()
+                .forType(String.class)
+                .defaultValue("DefaultValue")
+                .build();
 
         testObject.addSetting(SETTING_NAME, setting);
 

@@ -17,7 +17,7 @@ import java.util.Properties;
 class PropertyCsvFileHandler implements PropertiesHandler {
     private final File propertiesFile;
 
-    public PropertyCsvFileHandler(final File propertiesFile) {
+    protected PropertyCsvFileHandler(final File propertiesFile) {
         this.propertiesFile = propertiesFile;
     }
 
@@ -30,7 +30,7 @@ class PropertyCsvFileHandler implements PropertiesHandler {
             toUpdate.getSettings().forEach((key, setting) -> {
                 final String keyName = propertizeKey(key);
                 try {
-                    setting.setValue(properties.getProperty(keyName));
+                    setting.setFromStringValue(properties.getProperty(keyName));
                 } catch (EasySettingsException e) {
                     throw new RuntimeException(e);
                 }

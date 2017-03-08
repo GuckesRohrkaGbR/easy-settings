@@ -76,22 +76,22 @@ public class ConfigurationDialog extends Dialog<Settings> {
 
             final Setting keySetting = settingsMap.get(key);
             switch (keySetting.getSettingType()) {
-                case RANGE:
-                    final Slider slider = (Slider) ((HBox) valueNode).getChildrenUnmodifiable().get(0);
-                    settingsMap.get(key).setValue(slider.getValue());
-                    break;
-                case CHOICE:
-                    final ChoiceBox<?> choiceBox = (ChoiceBox<?>) valueNode;
-                    settingsMap.get(key).setValue(choiceBox.getValue());
-                    break;
-                case FILE:
-                    final Label label = (Label) ((HBox) valueNode).getChildrenUnmodifiable().get(0);
-                    settingsMap.get(key).setValue(new File(label.getText()));
-                    break;
+//                case RANGE:
+//                    final Slider slider = (Slider) ((HBox) valueNode).getChildrenUnmodifiable().get(0);
+//                    settingsMap.get(key).setValue(slider.getValue());
+//                    break;
+//                case CHOICE:
+//                    final ChoiceBox<?> choiceBox = (ChoiceBox<?>) valueNode;
+//                    settingsMap.get(key).setValue(choiceBox.getValue());
+//                    break;
+//                case FILE:
+//                    final Label label = (Label) ((HBox) valueNode).getChildrenUnmodifiable().get(0);
+//                    settingsMap.get(key).setValue(new File(label.getText()));
+//                    break;
                 case UNBOUNDED:
                     final TextField textField = (TextField) valueNode;
                     try {
-                        settingsMap.get(key).setValue(textField.getText());
+                        settingsMap.get(key).setFromStringValue(textField.getText());
                     } catch (EasySettingsException e) {
                         throw new RuntimeException(e);
                     }
@@ -134,15 +134,15 @@ public class ConfigurationDialog extends Dialog<Settings> {
         final Node myReturn;
 
         switch (setting.getSettingType()) {
-            case RANGE:
-                myReturn = createRangeInputNode(setting);
-                break;
-            case CHOICE:
-                myReturn = createChoiceInputNode(setting);
-                break;
-            case FILE:
-                myReturn = createFileInputNode(setting);
-                break;
+//            case RANGE:
+//                myReturn = createRangeInputNode(setting);
+//                break;
+//            case CHOICE:
+//                myReturn = createChoiceInputNode(setting);
+//                break;
+//            case FILE:
+//                myReturn = createFileInputNode(setting);
+//                break;
             default:
                 myReturn = createTextInputNode(setting);
                 break;
@@ -165,52 +165,52 @@ public class ConfigurationDialog extends Dialog<Settings> {
         return new TextField(setting.getValue().toString());
     }
 
-    @Contract("_ -> !null")
-    private <T> Node createChoiceInputNode(final Setting<T> setting) {
-        final ChoiceBox<T> choiceBox = new ChoiceBox<>();
+//    @Contract("_ -> !null")
+//    private <T> Node createChoiceInputNode(final Setting<T> setting) {
+//        final ChoiceBox<T> choiceBox = new ChoiceBox<>();
+//
+//        choiceBox.getItems().addAll(setting.getChoices());
+//        choiceBox.setValue(setting.getValue());
+//
+//        return choiceBox;
+//    }
 
-        choiceBox.getItems().addAll(setting.getChoices());
-        choiceBox.setValue(setting.getValue());
-
-        return choiceBox;
-    }
-
-    @Contract("_ -> !null")
-    private <T> Node createRangeInputNode(final Setting<T> setting) {
-        Node myReturn = createTextInputNode(setting);
-        if (Double.class.isAssignableFrom(setting.getValueType())) {
-            final double min = Double.valueOf(setting.getMinValue().toString());
-            final double max = Double.valueOf(setting.getMaxValue().toString());
-            final double current = Double.valueOf(setting.getValue().toString());
-
-            final Slider slider = new Slider(min, max, current);
-            slider.setShowTickLabels(true);
-            final Label valueLabel = new Label();
-            valueLabel.textProperty().bindBidirectional(slider.valueProperty(), new NumberStringConverter());
-            final HBox hbox = new HBox(5);
-
-            hbox.getChildren().addAll(slider, valueLabel);
-
-            myReturn = hbox;
-        }
-
-        return myReturn;
-    }
-
-    private Node createFileInputNode(final Setting<?> setting) {
-        final HBox myReturn = new HBox(5);
-
-        final Label fileLabel = new Label(setting.getValue().toString());
-        final Button openFileButton = new Button(STR.getString("open.file"));
-
-        openFileButton.setOnAction(event -> {
-            final FileChooser fileChooser = new FileChooser();
-            fileChooser.setTitle(STR.getString("open.file"));
-
-            fileLabel.textProperty().setValue(fileChooser.showOpenDialog(this.getOwner()).getAbsolutePath());
-        });
-
-        myReturn.getChildren().addAll(fileLabel, openFileButton);
-        return myReturn;
-    }
+//    @Contract("_ -> !null")
+//    private <T> Node createRangeInputNode(final Setting<T> setting) {
+//        Node myReturn = createTextInputNode(setting);
+//        if (Double.class.isAssignableFrom(setting.getValueType())) {
+//            final double min = Double.valueOf(setting.getMinValue().toString());
+//            final double max = Double.valueOf(setting.getMaxValue().toString());
+//            final double current = Double.valueOf(setting.getValue().toString());
+//
+//            final Slider slider = new Slider(min, max, current);
+//            slider.setShowTickLabels(true);
+//            final Label valueLabel = new Label();
+//            valueLabel.textProperty().bindBidirectional(slider.valueProperty(), new NumberStringConverter());
+//            final HBox hbox = new HBox(5);
+//
+//            hbox.getChildren().addAll(slider, valueLabel);
+//
+//            myReturn = hbox;
+//        }
+//
+//        return myReturn;
+//    }
+//
+//    private Node createFileInputNode(final Setting<?> setting) {
+//        final HBox myReturn = new HBox(5);
+//
+//        final Label fileLabel = new Label(setting.getValue().toString());
+//        final Button openFileButton = new Button(STR.getString("open.file"));
+//
+//        openFileButton.setOnAction(event -> {
+//            final FileChooser fileChooser = new FileChooser();
+//            fileChooser.setTitle(STR.getString("open.file"));
+//
+//            fileLabel.textProperty().setValue(fileChooser.showOpenDialog(this.getOwner()).getAbsolutePath());
+//        });
+//
+//        myReturn.getChildren().addAll(fileLabel, openFileButton);
+//        return myReturn;
+//    }
 }
