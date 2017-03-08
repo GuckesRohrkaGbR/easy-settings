@@ -32,8 +32,9 @@ public final class Settings {
         return Collections.unmodifiableMap(settingsMap);
     }
 
-    public Setting<?> get(final String setting) {
-        return getSettings().get(setting);
+    public <T> Setting<T> get(final String setting) {
+        // TODO: make safe cast
+        return (Setting<T>) getSettings().get(setting);
     }
 
     public void save() throws EasySettingsException {
