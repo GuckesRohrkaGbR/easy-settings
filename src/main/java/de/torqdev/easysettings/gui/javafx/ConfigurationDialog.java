@@ -57,40 +57,42 @@ public class ConfigurationDialog extends Dialog<Settings> {
     }
 
     @Contract("-> !null")
-    private Settings updateSettings() throws EasySettingsException {
+    private Settings updateSettings() {
         Settings myReturn;
 
         final Map<String, Setting<?>> settingsMap = settings.getSettings();
-        settingsMap.keySet().forEach(key -> {
-            final Node valueNode = inputFields.get(key);
-
-            final Setting keySetting = settingsMap.get(key);
-            switch (keySetting.getSettingType()) {
-                case RANGE:
-                    final Slider slider = (Slider) ((HBox) valueNode).getChildrenUnmodifiable().get(0);
-                    keySetting.setValue(slider.getValue());
-                    break;
-                case CHOICE:
-                    final ChoiceBox<?> choiceBox = (ChoiceBox<?>) valueNode;
-                    keySetting.setValue(choiceBox.getValue());
-                    break;
-                case FILE:
-                    final Label label = (Label) ((HBox) valueNode).getChildrenUnmodifiable().get(0);
-                    keySetting.setValue(new File(label.getText()));
-                    break;
-                case UNBOUNDED:
-                    final TextField textField = (TextField) valueNode;
-                    keySetting.setFromStringValue(textField.getText());
-                    break;
-                default:
-                    break;
-            }
-        });
+        settingsMap.keySet().forEach(key -> updateSetting(key, settingsMap));
 
         myReturn = settings;
         settings.save();
 
         return myReturn;
+    }
+
+    private void updateSetting(String key, Map<String, Setting<?>> settingsMap) {
+        final Node valueNode = inputFields.get(key);
+
+        final Setting keySetting = settingsMap.get(key);
+        switch (keySetting.getSettingType()) {
+            case RANGE:
+                final Slider slider = (Slider) ((HBox) valueNode).getChildrenUnmodifiable().get(0);
+                keySetting.setValue(slider.getValue());
+                break;
+            case CHOICE:
+                final ChoiceBox<?> choiceBox = (ChoiceBox<?>) valueNode;
+                keySetting.setValue(choiceBox.getValue());
+                break;
+            case FILE:
+                final Label label = (Label) ((HBox) valueNode).getChildrenUnmodifiable().get(0);
+                keySetting.setValue(new File(label.getText()));
+                break;
+            case UNBOUNDED:
+                final TextField textField = (TextField) valueNode;
+                keySetting.setFromStringValue(textField.getText());
+                break;
+            default:
+                break;
+        }
     }
 
     private void populatePane() {

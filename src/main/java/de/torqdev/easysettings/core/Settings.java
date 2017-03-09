@@ -33,11 +33,10 @@ public final class Settings {
     }
 
     public <T> Setting<T> get(final String setting) {
-        // TODO: make safe cast
         return (Setting<T>) getSettings().get(setting);
     }
 
-    public void save() throws EasySettingsException {
+    public void save() {
         if (handler != null) {
             handler.saveSettingsToFile(this);
         }

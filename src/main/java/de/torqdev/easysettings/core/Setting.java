@@ -22,7 +22,7 @@ public abstract class Setting<T> {
         this.helpMessage = helpMessage;
     }
 
-    public final void setFromStringValue(final String stringValue) throws EasySettingsException {
+    public final void setFromStringValue(final String stringValue) {
         StringConverter<T> converter = StringConverterUtil.getConverter(valueType);
         setValue(converter.fromString(stringValue));
     }
@@ -30,42 +30,6 @@ public abstract class Setting<T> {
     public void setValue(final T value) {
         this.value = value;
     }
-
-//        if (value != null && valueType.isAssignableFrom(value.getClass())) {
-//            switch (this.settingType) {
-//                case RANGE:
-//                    newVal = capValue(newVal);
-//                    break;
-//                case CHOICE:
-//                    newVal = validOrDefault(newVal);
-//                    break;
-//                default:
-//                    break;
-//            }
-//
-//            this.value = newVal;
-//        }
-//    }
-//
-//    private T validOrDefault(final T newVal) {
-//        if (this.choices.contains(newVal)) {
-//            return newVal;
-//        }
-//        return this.value;
-//    }
-
-//    @SuppressWarnings("unchecked")
-//    private T capValue(final T value) {
-//        T cappedValue = value;
-//        if (Comparable.class.isAssignableFrom(value.getClass())) {
-//            final Comparable<T> original = (Comparable<T>) cappedValue;
-//
-//            cappedValue = original.compareTo(maxValue) <= 0 ? cappedValue : maxValue;
-//            cappedValue = original.compareTo(minValue) > 0 ? cappedValue : minValue;
-//        }
-//
-//        return cappedValue;
-//    }
 
     public T getValue() {
         return value;
@@ -78,18 +42,6 @@ public abstract class Setting<T> {
     public SettingType getSettingType() {
         return settingType;
     }
-//
-//    public T getMinValue() {
-//        return minValue;
-//    }
-//
-//    public T getMaxValue() {
-//        return maxValue;
-//    }
-//
-//    public List<T> getChoices() {
-//        return choices;
-//    }
 
     @Contract(pure = true)
     public String getHelpMessage() {

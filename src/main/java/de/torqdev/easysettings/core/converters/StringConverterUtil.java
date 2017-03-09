@@ -70,7 +70,7 @@ public final class StringConverterUtil {
     }
 
     @SuppressWarnings("unchecked")
-    public static <T> StringConverter<T> getConverter(final Class<T> valueType) throws EasySettingsException {
+    public static <T> StringConverter<T> getConverter(final Class<T> valueType) {
         final StringConverter<T> myReturn = (StringConverter<T>) converters.get(valueType);
         if(myReturn == null) {
             throw new EasySettingsException("No String converter for data type " + valueType.getCanonicalName() + " found!");

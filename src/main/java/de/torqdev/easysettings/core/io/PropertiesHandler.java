@@ -16,7 +16,7 @@ public interface PropertiesHandler {
         return new PropertyCsvFileHandler(file);
     }
 
-    void updateSettings(Settings toUpdate) throws EasySettingsException;
+    void updateSettings(Settings toUpdate);
 
-    void saveSettingsToFile(Settings toSave) throws EasySettingsException;
+    void saveSettingsToFile(Settings toSave);
 }

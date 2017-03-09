@@ -22,7 +22,7 @@ class PropertyCsvFileHandler implements PropertiesHandler {
     }
 
     @Override
-    public void updateSettings(final Settings toUpdate) throws EasySettingsException {
+    public void updateSettings(final Settings toUpdate) {
         final Properties properties = new Properties();
         try (FileInputStream fis = new FileInputStream(propertiesFile)) {
             properties.load(fis);
@@ -37,7 +37,7 @@ class PropertyCsvFileHandler implements PropertiesHandler {
     }
 
     @Override
-    public void saveSettingsToFile(final Settings toSave) throws EasySettingsException {
+    public void saveSettingsToFile(final Settings toSave) {
         final Properties properties = new Properties();
 
         toSave.getSettings().forEach((key, setting) -> {
