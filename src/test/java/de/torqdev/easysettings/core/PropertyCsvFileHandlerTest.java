@@ -16,7 +16,6 @@ import java.util.Properties;
  * @author <a href="mailto:christopher.guckes@torq-dev.de">Christopher Guckes</a>
  * @version 1.0
  */
-@Ignore
 public class PropertyCsvFileHandlerTest {
     private static final String TEST_FILENAME = System.getProperty(
             "java.io.tmpdir") + File.separator + "property-file-handler-test-file.properties";
