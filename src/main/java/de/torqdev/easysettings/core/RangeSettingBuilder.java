@@ -4,7 +4,7 @@ package de.torqdev.easysettings.core;
  * @author <a href="mailto:christopher.guckes@torq-dev.de">Christopher Guckes</a>
  * @version 1.0
  */
-public class RangeSettingBuilder<T extends Comparable<T>> {
+public class RangeSettingBuilder<T extends Number> {
     private T defaultValue;
     private Class<T> valueType;
     private T min;

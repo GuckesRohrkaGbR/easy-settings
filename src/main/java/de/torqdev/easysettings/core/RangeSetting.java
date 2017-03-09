@@ -6,7 +6,7 @@ import static de.torqdev.easysettings.core.SettingType.RANGE;
  * @author <a href="mailto:christopher.guckes@torq-dev.de">Christopher Guckes</a>
  * @version 1.0
  */
-public class RangeSetting<T extends Comparable<T>> extends Setting<T> {
+public class RangeSetting<T extends Number> extends Setting<T> {
     private final T min;
     private final T max;
 

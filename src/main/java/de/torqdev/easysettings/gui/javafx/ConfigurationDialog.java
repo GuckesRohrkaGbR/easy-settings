@@ -162,15 +162,15 @@ public class ConfigurationDialog extends Dialog<Settings> {
     }
 
     @Contract("_ -> !null")
-    private <T extends Comparable<T>> Node createRangeInputNode(final Setting<T> setting) {
+    private <T extends Number> Node createRangeInputNode(final Setting<T> setting) {
         Node myReturn = createTextInputNode(setting);
         if (Double.class.isAssignableFrom(setting.getValueType())) {
             RangeSetting<T> rangeSetting = (RangeSetting<T>) setting;
-            final double min = Double.valueOf(rangeSetting.getMin().toString());
-            final double max = Double.valueOf(rangeSetting.getMax().toString());
-            final double current = Double.valueOf(setting.getValue().toString());
+            final Number min = rangeSetting.getMin();
+            final Number max = rangeSetting.getMax();
+            final Number current = setting.getValue();
 
-            final Slider slider = new Slider(min, max, current);
+            final Slider slider = new Slider(min.doubleValue(), max.doubleValue(), current.doubleValue());
             slider.setShowTickLabels(true);
             final Label valueLabel = new Label();
             valueLabel.textProperty().bindBidirectional(slider.valueProperty(), new NumberStringConverter());

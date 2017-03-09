@@ -13,7 +13,7 @@ public class SettingBuilder {
         return new ChoiceSettingBuilder<>();
     }
 
-    public <T extends Comparable<T>> RangeSettingBuilder<T> rangeSetting() {
+    public <T extends Number> RangeSettingBuilder<T> rangeSetting() {
         return new RangeSettingBuilder<>();
     }
 

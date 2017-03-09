@@ -90,7 +90,6 @@ public class SettingTest {
 
     @Test
     public void choiceSettingsReturnValidChoices() throws Exception {
-        System.out.println(((ChoiceSetting<Color>) testChoiceSetting).getChoices());
         assertThat(
                 ((ChoiceSetting<Color>) testChoiceSetting).getChoices(),
                 containsInAnyOrder(Color.BLUE, Color.RED, Color.GREEN, Color.BLACK)
