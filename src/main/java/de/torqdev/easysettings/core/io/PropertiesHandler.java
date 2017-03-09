@@ -1,6 +1,5 @@
 package de.torqdev.easysettings.core.io;
 
-import de.torqdev.easysettings.core.EasySettingsException;
 import de.torqdev.easysettings.core.Settings;
 import org.jetbrains.annotations.Contract;
 
