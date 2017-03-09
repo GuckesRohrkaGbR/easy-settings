@@ -36,6 +36,10 @@ import java.util.concurrent.ConcurrentHashMap;
 public final class StringConverterUtil {
     private static final Map<Class<?>, StringConverter<?>> converters = fillMapWithDefaults();
 
+    private StringConverterUtil() {
+        // empty utility class constructor
+    }
+
     @Contract(pure = true)
     private static Map<Class<?>, StringConverter<?>> fillMapWithDefaults() {
         final Map<Class<?>, StringConverter<?>> myReturn = new ConcurrentHashMap<>();
@@ -59,10 +63,6 @@ public final class StringConverterUtil {
         myReturn.put(String.class, new DefaultStringConverter());
 
         return myReturn;
-    }
-
-    private StringConverterUtil() {
-        // empty utility class constructor
     }
 
     public static void registerStringConverter(final Class<?> clazz, final StringConverter<?> converter) {

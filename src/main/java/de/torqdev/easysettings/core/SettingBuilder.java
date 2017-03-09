@@ -6,15 +6,15 @@ package de.torqdev.easysettings.core;
  */
 public class SettingBuilder {
     public <T> UnboundedSettingBuilder<T> unboundedSetting() {
-        return new UnboundedSettingBuilder<T>();
+        return new UnboundedSettingBuilder<>();
     }
 
     public <T> ChoiceSettingBuilder<T> choiceSetting() {
-        return new ChoiceSettingBuilder<T>();
+        return new ChoiceSettingBuilder<>();
     }
 
     public <T extends Comparable<T>> RangeSettingBuilder<T> rangeSetting() {
-        return new RangeSettingBuilder<T>();
+        return new RangeSettingBuilder<>();
     }
 
     public FileSettingBuilder fileSetting() {

@@ -29,11 +29,7 @@ class PropertyCsvFileHandler implements PropertiesHandler {
 
             toUpdate.getSettings().forEach((key, setting) -> {
                 final String keyName = propertizeKey(key);
-                try {
-                    setting.setFromStringValue(properties.getProperty(keyName));
-                } catch (EasySettingsException e) {
-                    throw new RuntimeException(e);
-                }
+                setting.setFromStringValue(properties.getProperty(keyName));
             });
         } catch (IOException e) {
             throw new EasySettingsException(e);

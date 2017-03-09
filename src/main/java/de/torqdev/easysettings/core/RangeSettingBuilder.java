@@ -38,6 +38,6 @@ public class RangeSettingBuilder<T extends Comparable<T>> {
     }
 
     public RangeSetting<T> build() {
-        return new RangeSetting<T>(defaultValue, valueType, min, max, helpMessage);
+        return new RangeSetting<>(defaultValue, valueType, min, max, helpMessage);
     }
 }

@@ -10,7 +10,7 @@ public class ChoiceSettingBuilder<T> {
     private T defaultValue;
     private Class<T> valueType;
     private String helpMessage;
-    private final Set<T> choices = new HashSet<T>();
+    private final Set<T> choices = new HashSet<>();
 
     public ChoiceSettingBuilder<T> forType(Class<T> clazz) {
         this.valueType = clazz;

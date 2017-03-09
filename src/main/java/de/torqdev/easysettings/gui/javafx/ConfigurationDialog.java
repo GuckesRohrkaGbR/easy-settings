@@ -5,22 +5,11 @@ import de.torqdev.easysettings.core.Setting;
 import de.torqdev.easysettings.core.Settings;
 import javafx.geometry.Insets;
 import javafx.scene.Node;
-import javafx.scene.control.Button;
-import javafx.scene.control.ButtonBar;
-import javafx.scene.control.ButtonType;
-import javafx.scene.control.ChoiceBox;
-import javafx.scene.control.Dialog;
-import javafx.scene.control.Label;
-import javafx.scene.control.Slider;
-import javafx.scene.control.TextField;
-import javafx.scene.control.Tooltip;
+import javafx.scene.control.*;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
-import javafx.scene.layout.HBox;
-import javafx.stage.FileChooser;
-import javafx.util.converter.NumberStringConverter;
 import org.jetbrains.annotations.Contract;
 
-import java.io.File;
 import java.util.Locale;
 import java.util.Map;
 import java.util.ResourceBundle;
@@ -37,16 +26,19 @@ public class ConfigurationDialog extends Dialog<Settings> {
     private final Map<String, Node> inputFields = new ConcurrentHashMap<>();
 
     public ConfigurationDialog(final Settings settings) {
+        this(settings, STR.getString("configure"), null, null);
+    }
+
+    public ConfigurationDialog(final Settings settings, String title, String headerText, ImageView icon) {
         super();
         this.settings = settings;
 
-        basicSetup();
+        setTitle(title);
+        setHeaderText(headerText);
+        setGraphic(icon);
+
         createButtons();
         populatePane();
-    }
-
-    private void basicSetup() {
-        //TODO: Add icon and header text
     }
 
     private void createButtons() {
@@ -56,11 +48,7 @@ public class ConfigurationDialog extends Dialog<Settings> {
         this.setResultConverter(buttonType -> {
             Settings myReturn = null;
             if (buttonType == saveButton) {
-                try {
-                    myReturn = updateSettings();
-                } catch (EasySettingsException e) {
-                    throw new RuntimeException(e);
-                }
+                myReturn = updateSettings();
             }
             return myReturn;
         });
@@ -90,11 +78,7 @@ public class ConfigurationDialog extends Dialog<Settings> {
 //                    break;
                 case UNBOUNDED:
                     final TextField textField = (TextField) valueNode;
-                    try {
-                        settingsMap.get(key).setFromStringValue(textField.getText());
-                    } catch (EasySettingsException e) {
-                        throw new RuntimeException(e);
-                    }
+                    settingsMap.get(key).setFromStringValue(textField.getText());
                     break;
                 default:
                     break;
