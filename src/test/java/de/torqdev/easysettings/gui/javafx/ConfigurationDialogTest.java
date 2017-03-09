@@ -1,6 +1,5 @@
 package de.torqdev.easysettings.gui.javafx;
 
-import de.torqdev.easysettings.core.Setting;
 import de.torqdev.easysettings.core.SettingBuilder;
 import de.torqdev.easysettings.core.Settings;
 import de.torqdev.easysettings.matchers.ChoiceBoxMatcher;
@@ -18,7 +17,6 @@ import javafx.stage.WindowEvent;
 import org.jetbrains.annotations.Contract;
 import org.junit.After;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.testfx.api.FxToolkit;
 import org.testfx.framework.junit.ApplicationTest;
@@ -26,7 +24,6 @@ import org.testfx.matcher.control.TextInputControlMatchers;
 
 import java.io.File;
 import java.text.NumberFormat;
-import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.Locale;
 import java.util.Optional;
@@ -45,15 +42,12 @@ import static org.hamcrest.Matchers.notNullValue;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 import static org.testfx.api.FxAssert.verifyThat;
-import static org.testfx.matcher.base.NodeMatchers.isNotNull;
-import static org.testfx.matcher.base.NodeMatchers.isNull;
-import static org.testfx.matcher.base.NodeMatchers.isVisible;
+import static org.testfx.matcher.base.NodeMatchers.*;
 
 /**
  * @author Christopher Guckes (christopher.guckes@torq-dev.de)
  * @version 1.0
  */
-@Ignore
 public class ConfigurationDialogTest extends ApplicationTest {
     private static final ResourceBundle STR = ResourceBundle.getBundle("i18n.EasySettings", Locale.getDefault());
     private static final NumberFormat NUMBER_FORMAT = NumberFormat.getInstance(Locale.getDefault());
@@ -112,11 +106,14 @@ public class ConfigurationDialogTest extends ApplicationTest {
                 .<Double>rangeSetting()
                 .forType(Double.class)
                 .defaultValue(1.0)
+                .lowerBound(0.0)
+                .upperBound(2.0)
                 .build());
         settings.addSetting(CHOICE_SETTING, builder
                 .<String>choiceSetting()
                 .forType(String.class)
                 .defaultValue("Sel 3")
+                .addChoices("Sel 1", "Sel 2")
                 .build());
         settings.addSetting(FILE_SETTING, builder
                 .fileSetting()

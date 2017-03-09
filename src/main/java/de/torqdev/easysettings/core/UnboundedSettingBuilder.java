@@ -25,6 +25,6 @@ public class UnboundedSettingBuilder<T> {
     }
 
     public UnboundedSetting<T> build() {
-        return new UnboundedSetting<T>(defaultValue, valueType, helpMessage);
+        return new UnboundedSetting<>(defaultValue, valueType, helpMessage);
     }
 }

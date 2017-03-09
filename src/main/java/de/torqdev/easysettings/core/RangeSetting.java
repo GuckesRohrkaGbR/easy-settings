@@ -1,6 +1,5 @@
 package de.torqdev.easysettings.core;
 
-import static de.torqdev.easysettings.core.SettingType.CHOICE;
 import static de.torqdev.easysettings.core.SettingType.RANGE;
 
 /**

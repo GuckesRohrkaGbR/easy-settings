@@ -4,18 +4,12 @@ import org.junit.Before;
 import org.junit.Test;
 
 import java.awt.*;
-import java.util.Arrays;
-import java.util.Collection;
 
-import static de.torqdev.easysettings.core.SettingType.CHOICE;
-import static de.torqdev.easysettings.core.SettingType.RANGE;
-import static de.torqdev.easysettings.core.SettingType.UNBOUNDED;
+import static de.torqdev.easysettings.core.SettingType.*;
 import static org.hamcrest.Matchers.containsInAnyOrder;
-import static org.hamcrest.Matchers.hasItems;
 import static org.hamcrest.core.IsEqual.equalTo;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertThat;
-import static org.junit.Assert.fail;
 
 /**
  * @author <a href="mailto:christopher.guckes@torq-dev.de">Christopher Guckes</a>

@@ -9,7 +9,6 @@ import org.junit.*;
 
 import java.io.File;
 import java.io.FileInputStream;
-import java.util.Arrays;
 import java.util.Properties;
 
 /**
