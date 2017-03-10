@@ -15,6 +15,7 @@ public class MultiselectSetting<T> implements SettingContainer<HashSet<T>> {
         this.setting = new Setting<>(SettingType.MULTISELECT, valueType, helpMessage);
         this.setValue(defaultValue);
         this.choices = choices;
+        this.choices.addAll(defaultValue);
     }
 
     public Set<T> getChoices() {
