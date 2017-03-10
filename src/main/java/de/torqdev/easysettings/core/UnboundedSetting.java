@@ -6,6 +6,7 @@ import static de.torqdev.easysettings.core.SettingType.UNBOUNDED;
  * @author <a href="mailto:christopher.guckes@torq-dev.de">Christopher Guckes</a>
  * @version 1.0
  */
+@SuppressWarnings("WeakerAccess")
 public class UnboundedSetting<T> implements SettingContainer<T> {
     private final Setting<T> setting;
 

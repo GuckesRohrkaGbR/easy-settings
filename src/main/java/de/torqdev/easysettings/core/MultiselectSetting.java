@@ -11,7 +11,7 @@ public class MultiselectSetting<T> implements SettingContainer<Set<T>> {
     private final Setting<Set<T>> setting;
     private final Set<T> choices;
 
-    public MultiselectSetting(Set<T> defaultValue, Set<T> choices, String helpMessage) {
+    protected MultiselectSetting(Set<T> defaultValue, Set<T> choices, String helpMessage) {
         this.setting = new Setting<>(SettingType.MULTISELECT, getSetType(), helpMessage);
         this.setValue(defaultValue);
         this.choices = choices;

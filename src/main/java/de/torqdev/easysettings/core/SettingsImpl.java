@@ -10,6 +10,7 @@ import java.util.Map;
  * @author <a href="mailto:christopher.guckes@torq-dev.de">Christopher Guckes</a>
  * @version 1.0
  */
+@SuppressWarnings("WeakerAccess")
 public class SettingsImpl implements Settings {
     private final PropertiesHandler handler;
 

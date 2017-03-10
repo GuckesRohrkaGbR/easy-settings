@@ -1,7 +1,7 @@
 package de.torqdev.easysettings.core.io;
 
 import de.torqdev.easysettings.core.*;
-import de.torqdev.easysettings.core.converters.HashSetStringConverter;
+import de.torqdev.easysettings.core.converters.SetStringConverter;
 import de.torqdev.easysettings.core.converters.StringConverterUtil;
 import javafx.scene.paint.Color;
 import org.junit.Before;
@@ -39,7 +39,7 @@ public class PropertiesFileHandlerTest {
 
     @BeforeClass
     public static void registerHashMapStringConverter() {
-        StringConverterUtil.registerStringConverter(new HashSet<Locale>().getClass(), new HashSetStringConverter<>(Locale.class));
+        StringConverterUtil.registerStringConverter(new HashSet<Locale>().getClass(), new SetStringConverter<>(Locale.class));
     }
 
     @Before
