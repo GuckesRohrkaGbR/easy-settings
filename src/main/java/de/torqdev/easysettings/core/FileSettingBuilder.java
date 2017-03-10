@@ -10,7 +10,7 @@ public class FileSettingBuilder {
     private File defaultFile;
     private String helpMessage;
 
-    public Setting<File> build() {
+    public FileSetting build() {
         return new FileSetting(defaultFile, helpMessage);
     }
 

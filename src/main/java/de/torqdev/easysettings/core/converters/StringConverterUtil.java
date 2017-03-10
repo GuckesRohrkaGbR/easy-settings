@@ -1,6 +1,7 @@
 package de.torqdev.easysettings.core.converters;
 
 import de.torqdev.easysettings.core.EasySettingsException;
+import javafx.scene.paint.Color;
 import javafx.util.StringConverter;
 import javafx.util.converter.BigDecimalStringConverter;
 import javafx.util.converter.BigIntegerStringConverter;
@@ -49,6 +50,7 @@ public final class StringConverterUtil {
         myReturn.put(Boolean.class, new BooleanStringConverter());
         myReturn.put(Byte.class, new ByteStringConverter());
         myReturn.put(Character.class, new CharacterStringConverter());
+        myReturn.put(Color.class, new ColorStringConverter());
         myReturn.put(Date.class, new DateTimeStringConverter());
         myReturn.put(Double.class, new DoubleStringConverter());
         myReturn.put(File.class, new FileStringConverter());

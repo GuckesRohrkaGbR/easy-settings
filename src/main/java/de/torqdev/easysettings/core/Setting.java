@@ -10,7 +10,7 @@ import static org.apache.commons.lang.StringUtils.defaultString;
  * @author <a href="mailto:christopher.guckes@torq-dev.de">Christopher Guckes</a>
  * @version 1.0
  */
-public abstract class Setting<T> {
+public class Setting<T> {
     private final String helpMessage;
     private T value;
     private final Class<T> valueType;
@@ -22,12 +22,7 @@ public abstract class Setting<T> {
         this.helpMessage = helpMessage;
     }
 
-    public final void setFromStringValue(final String stringValue) {
-        StringConverter<T> converter = StringConverterUtil.getConverter(valueType);
-        setValue(converter.fromString(stringValue));
-    }
-
-    public void setValue(final T value) {
+    protected void setValue(final T value) {
         this.value = value;
     }
 

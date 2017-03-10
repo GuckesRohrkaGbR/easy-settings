@@ -11,11 +11,11 @@ import java.io.File;
 public class FileStringConverter extends StringConverter<File> {
     @Override
     public String toString(final File file) {
-        return file.toString();
+        return (file == null) ? null : file.toString();
     }
 
     @Override
     public File fromString(final String path) {
-        return new File(path);
+        return (path == null) ? null : new File(path);
     }
 }

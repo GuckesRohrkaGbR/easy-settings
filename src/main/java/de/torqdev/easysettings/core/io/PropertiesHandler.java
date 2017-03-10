@@ -10,12 +10,9 @@ import java.io.File;
  * @version 1.0
  */
 public interface PropertiesHandler {
-    @Contract("_ -> !null")
-    static PropertiesHandler getPropertiesHandlerFor(File file) {
-        return new PropertyCsvFileHandler(file);
-    }
+    void updateSettings();
 
-    void updateSettings(Settings toUpdate);
+    void saveSettingsToFile();
 
-    void saveSettingsToFile(Settings toSave);
+    void setToHandle(Settings toHandle);
 }

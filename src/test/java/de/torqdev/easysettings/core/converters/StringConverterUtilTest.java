@@ -5,8 +5,12 @@ import javafx.util.StringConverter;
 import javafx.util.converter.NumberStringConverter;
 import org.junit.Test;
 
+import java.lang.reflect.Constructor;
+import java.lang.reflect.Modifier;
+
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.junit.Assert.assertThat;
+import static org.junit.Assert.assertTrue;
 
 /**
  * @author <a href="mailto:christopher.guckes@torq-dev.de">Christopher Guckes</a>
@@ -27,5 +31,13 @@ public class StringConverterUtilTest {
     @Test(expected = EasySettingsException.class)
     public void throwsExceptionIfNoConverterWasFound() throws Exception {
         StringConverterUtil.getConverter(Object.class);
+    }
+
+    @Test
+    public void coverPrivateConstructor() throws Exception {
+        Constructor<?> constructor  = StringConverterUtil.class.getDeclaredConstructor();
+        assertTrue(Modifier.isPrivate(constructor.getModifiers()));
+        constructor.setAccessible(true);
+        constructor.newInstance();
     }
 }
