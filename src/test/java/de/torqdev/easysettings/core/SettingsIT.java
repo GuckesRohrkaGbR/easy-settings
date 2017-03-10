@@ -4,13 +4,13 @@ import de.torqdev.easysettings.core.converters.HashSetStringConverter;
 import de.torqdev.easysettings.core.converters.StringConverterUtil;
 import de.torqdev.easysettings.core.io.PropertiesHandler;
 import de.torqdev.easysettings.core.io.PropertiesFileHandler;
+import de.torqdev.easysettings.core.io.PropertiesHandlerFactory;
 import javafx.scene.paint.Color;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
 import java.io.File;
-import java.io.IOException;
 import java.nio.file.Files;
 import java.util.HashSet;
 import java.util.Locale;
@@ -27,13 +27,13 @@ import static org.hamcrest.Matchers.*;
  */
 @SuppressWarnings("ConstantConditions")
 public class SettingsIT {
-    private static final File CSV_FILE = new File(
+    private static final File PROPERTIES_FILE = new File(
             SettingsIT.class
                     .getClassLoader()
                     .getResource("properties/integration-test.properties")
                     .getFile()
     );
-    private static final PropertiesHandler HANDLER = new PropertiesFileHandler(CSV_FILE);
+    private static final PropertiesHandler HANDLER = PropertiesHandlerFactory.getHandlerFor(PROPERTIES_FILE);
     private static final String UNBOUNDED_SETTING = "Unbounded Setting";
     private static final String HELP_MESSAGE = "Help Message";
     private static final String DEFAULT_VALUE = "Default Value";
@@ -180,7 +180,7 @@ public class SettingsIT {
         testObject.save();
 
         // verify
-        String content = new String(Files.readAllBytes(CSV_FILE.toPath()));
+        String content = new String(Files.readAllBytes(PROPERTIES_FILE.toPath()));
         assertThat(content, containsString(DEFAULT_VALUE));
     }
 
@@ -213,7 +213,7 @@ public class SettingsIT {
         testObject.save();
 
         // execute
-        Settings newSettings = new SettingsImpl(new PropertiesFileHandler(CSV_FILE));
+        Settings newSettings = new SettingsImpl(new PropertiesFileHandler(PROPERTIES_FILE));
         fillSettings(newSettings);
         newSettings.load();
 

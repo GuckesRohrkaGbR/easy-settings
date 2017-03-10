@@ -11,13 +11,13 @@ import java.io.File;
  */
 @SuppressWarnings("ConstantConditions")
 public class SettingsImplTest extends SettingsTest {
-    private static final File CSV_FILE = new File(
+    private static final File PROPERTIES_FILE = new File(
             SettingsIT.class
                     .getClassLoader()
                     .getResource("properties/settings-impl-test.properties")
                     .getFile()
     );
-    private static final PropertiesHandler HANDLER = new PropertiesFileHandler(CSV_FILE);
+    private static final PropertiesHandler HANDLER = new PropertiesFileHandler(PROPERTIES_FILE);
 
     @Override
     protected Settings getNewTestObject() {
