@@ -22,13 +22,13 @@ public class SettingsImpl implements Settings {
 
     private final Map<String, SettingType> settingsTypeMap = new LinkedHashMap<>();
 
-    public SettingsImpl(PropertiesHandler handler) {
+    public SettingsImpl(final PropertiesHandler handler) {
         this.handler = handler;
         handler.setToHandle(this);
     }
 
     @Override
-    public <T> Setting<T> getSetting(String key) {
+    public <T> Setting<T> getSetting(final String key) {
         Setting<T> myReturn = null;
 
         if (settingsTypeMap.containsKey(key)) {
@@ -55,56 +55,56 @@ public class SettingsImpl implements Settings {
     }
 
     @Override
-    public <T> UnboundedSetting<T> getUnboundedSetting(String key) {
+    public <T> UnboundedSetting<T> getUnboundedSetting(final String key) {
         return (UnboundedSetting<T>) unboundedSettingMap.get(key);
     }
 
     @Override
-    public <T> void addUnboundedSetting(String key, UnboundedSetting<T> setting) {
+    public <T> void addUnboundedSetting(final String key, final UnboundedSetting<T> setting) {
         settingsTypeMap.put(key, setting.getSetting().getSettingType());
         unboundedSettingMap.put(key, setting);
     }
 
     @Override
-    public <T> ChoiceSetting<T> getChoiceSetting(String key) {
+    public <T> ChoiceSetting<T> getChoiceSetting(final String key) {
         return (ChoiceSetting<T>) choiceSettingMap.get(key);
     }
 
     @Override
-    public <T> void addChoiceSetting(String key, ChoiceSetting<T> setting) {
+    public <T> void addChoiceSetting(final String key, final ChoiceSetting<T> setting) {
         settingsTypeMap.put(key, setting.getSetting().getSettingType());
         choiceSettingMap.put(key, setting);
     }
 
     @Override
-    public <T extends Number> RangeSetting<T> getRangeSetting(String key) {
+    public <T extends Number> RangeSetting<T> getRangeSetting(final String key) {
         return (RangeSetting<T>) rangeSettingMap.get(key);
     }
 
     @Override
-    public <T extends Number> void addRangeSetting(String key, RangeSetting<T> setting) {
+    public <T extends Number> void addRangeSetting(final String key, final RangeSetting<T> setting) {
         settingsTypeMap.put(key, setting.getSetting().getSettingType());
         rangeSettingMap.put(key, setting);
     }
 
     @Override
-    public FileSetting getFileSetting(String key) {
+    public FileSetting getFileSetting(final String key) {
         return fileSettingMap.get(key);
     }
 
     @Override
-    public void addFileSetting(String key, FileSetting setting) {
+    public void addFileSetting(final String key, final FileSetting setting) {
         settingsTypeMap.put(key, setting.getSetting().getSettingType());
         fileSettingMap.put(key, setting);
     }
 
     @Override
-    public <T> MultiselectSetting<T> getMultiselectSetting(String key) {
+    public <T> MultiselectSetting<T> getMultiselectSetting(final String key) {
         return (MultiselectSetting<T>) multiselectSettingMap.get(key);
     }
 
     @Override
-    public <T> void addMultiselectSetting(String key, MultiselectSetting<T> setting) {
+    public <T> void addMultiselectSetting(final String key, final MultiselectSetting<T> setting) {
         settingsTypeMap.put(key, setting.getSetting().getSettingType());
         multiselectSettingMap.put(key, setting);
     }

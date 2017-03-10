@@ -14,12 +14,12 @@ public class FileSettingBuilder {
         return new FileSetting(defaultFile, helpMessage);
     }
 
-    public FileSettingBuilder defaultValue(File defaultFile) {
+    public FileSettingBuilder defaultValue(final File defaultFile) {
         this.defaultFile = defaultFile;
         return this;
     }
 
-    public FileSettingBuilder withHelpMessage(String helpMessage) {
+    public FileSettingBuilder withHelpMessage(final String helpMessage) {
         this.helpMessage = helpMessage;
         return this;
     }

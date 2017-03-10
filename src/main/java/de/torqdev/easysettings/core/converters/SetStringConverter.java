@@ -15,7 +15,7 @@ public class SetStringConverter<T> extends StringConverter<Set<T>> {
     private final StringConverter<T> converter;
 
 
-    public SetStringConverter(Class<T> type) {
+    public SetStringConverter(final Class<T> type) {
         this.converter = StringConverterUtil.getConverter(type);
     }
 
@@ -30,9 +30,9 @@ public class SetStringConverter<T> extends StringConverter<Set<T>> {
             return null;
         }
 
-        String set = sanitize(stringSet);
+        final String set = sanitize(stringSet);
 
-        Set<T> hashSet = new HashSet<>();
+        final Set<T> hashSet = new HashSet<>();
 
         Arrays.stream(set.split(","))
                 .map(String::trim)

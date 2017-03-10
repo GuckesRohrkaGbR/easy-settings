@@ -14,7 +14,7 @@ public class Setting<T> {
     private final Class<T> valueType;
     private final SettingType settingType;
 
-    protected Setting(SettingType unbounded, Class<T> valueType, String helpMessage) {
+    protected Setting(final SettingType unbounded, final Class<T> valueType, final String helpMessage) {
         this.settingType = unbounded;
         this.valueType = valueType;
         this.helpMessage = helpMessage;

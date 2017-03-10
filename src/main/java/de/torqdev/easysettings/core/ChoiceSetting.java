@@ -12,7 +12,7 @@ public class ChoiceSetting<T> implements SettingContainer<T> {
     private final Set<T> choices;
     private final Setting<T> setting;
 
-    protected ChoiceSetting(T defaultValue, Class<T> valueType, Set<T> choices, String helpMessage) {
+    protected ChoiceSetting(final T defaultValue, final Class<T> valueType, final Set<T> choices, final String helpMessage) {
         setting = new Setting<>(CHOICE, valueType, helpMessage);
         setValue(defaultValue);
         this.choices = choices;
@@ -20,7 +20,7 @@ public class ChoiceSetting<T> implements SettingContainer<T> {
     }
 
     @Override
-    public void setValue(T value) {
+    public void setValue(final T value) {
         setting.setValue(value);
     }
 

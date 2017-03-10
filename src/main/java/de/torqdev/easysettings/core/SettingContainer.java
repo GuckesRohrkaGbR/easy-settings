@@ -12,8 +12,8 @@ public interface SettingContainer<T> {
 
     void setValue(T value);
 
-    default void setFromStringValue(String stringValue) {
-        StringConverter<T> converter = StringConverterUtil.getConverter(getSetting().getValueType());
+    default void setFromStringValue(final String stringValue) {
+        final StringConverter<T> converter = StringConverterUtil.getConverter(getSetting().getValueType());
         setValue(converter.fromString(stringValue));
     }
 

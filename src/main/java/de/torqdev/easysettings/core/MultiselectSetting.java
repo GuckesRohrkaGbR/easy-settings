@@ -11,7 +11,7 @@ public class MultiselectSetting<T> implements SettingContainer<Set<T>> {
     private final Setting<Set<T>> setting;
     private final Set<T> choices;
 
-    protected MultiselectSetting(Set<T> defaultValue, Set<T> choices, String helpMessage) {
+    protected MultiselectSetting(final Set<T> defaultValue, final Set<T> choices, final String helpMessage) {
         this.setting = new Setting<>(SettingType.MULTISELECT, getSetType(), helpMessage);
         this.setValue(defaultValue);
         this.choices = choices;
@@ -20,7 +20,7 @@ public class MultiselectSetting<T> implements SettingContainer<Set<T>> {
 
     @SuppressWarnings("unchecked")
     private Class<Set<T>> getSetType() {
-        @SuppressWarnings("MismatchedQueryAndUpdateOfCollection")
+        @SuppressWarnings("MismatchedQueryAndUpdateOfCollection") final
         Set<T> myReturn = new HashSet<>();
         return (Class<Set<T>>) myReturn.getClass();
     }
@@ -35,7 +35,7 @@ public class MultiselectSetting<T> implements SettingContainer<Set<T>> {
     }
 
     @Override
-    public void setValue(Set<T> value) {
+    public void setValue(final Set<T> value) {
         setting.setValue(value);
     }
 }

@@ -11,7 +11,7 @@ import static de.torqdev.easysettings.core.SettingType.FILE;
 public class FileSetting implements SettingContainer<File> {
     private final Setting<File> setting;
 
-    protected FileSetting(File defaultFile, String helpMessage) {
+    protected FileSetting(final File defaultFile, final String helpMessage) {
         this.setting = new Setting<>(FILE, File.class, helpMessage);
         setValue(defaultFile);
     }
@@ -22,7 +22,7 @@ public class FileSetting implements SettingContainer<File> {
     }
 
     @Override
-    public void setValue(File value) {
+    public void setValue(final File value) {
         this.setting.setValue(value);
     }
 }

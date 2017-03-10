@@ -11,7 +11,7 @@ public class RangeSetting<T extends Number>implements SettingContainer<T> {
     private final T max;
     private final Setting<T> setting;
 
-    protected RangeSetting(T defaultValue, Class<T> valueType, T min, T max, String helpMessage) {
+    protected RangeSetting(final T defaultValue, final Class<T> valueType, final T min, final T max, final String helpMessage) {
         this.setting = new Setting<>(RANGE, valueType, helpMessage);
         this.min = min;
         this.max = max;
@@ -19,19 +19,19 @@ public class RangeSetting<T extends Number>implements SettingContainer<T> {
     }
 
     @Override
-    public void setValue(T defaultValue) {
+    public void setValue(final T defaultValue) {
         this.setting.setValue(capValue(defaultValue));
     }
 
-    private T capValue(T defaultValue) {
+    private T capValue(final T defaultValue) {
         return minimum(this.max, maximum(this.min, defaultValue));
     }
 
-    private T maximum(T v1, T v2) {
+    private T maximum(final T v1, final T v2) {
         return v1.doubleValue() < v2.doubleValue() ? v2 : v1;
     }
 
-    private T minimum(T v1, T v2) {
+    private T minimum(final T v1, final T v2) {
         return v1.doubleValue() > v2.doubleValue() ? v2 : v1;
     }
 

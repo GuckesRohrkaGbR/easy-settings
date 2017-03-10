@@ -11,28 +11,28 @@ public class RangeSettingBuilder<T extends Number> {
     private T max;
     private String helpMessage;
 
-    public RangeSettingBuilder<T> forType(Class<T> clazz) {
+    public RangeSettingBuilder<T> forType(final Class<T> clazz) {
         this.valueType = clazz;
         return this;
     }
 
-    public RangeSettingBuilder<T> defaultValue(T defaultValue) {
+    public RangeSettingBuilder<T> defaultValue(final T defaultValue) {
         this.defaultValue = defaultValue;
         return this;
     }
 
 
-    public RangeSettingBuilder<T> lowerBound(T min) {
+    public RangeSettingBuilder<T> lowerBound(final T min) {
         this.min = min;
         return this;
     }
 
-    public RangeSettingBuilder<T> upperBound(T max) {
+    public RangeSettingBuilder<T> upperBound(final T max) {
         this.max = max;
         return this;
     }
 
-    public RangeSettingBuilder<T> withHelpMessage(String helpMessage) {
+    public RangeSettingBuilder<T> withHelpMessage(final String helpMessage) {
         this.helpMessage = helpMessage;
         return this;
     }

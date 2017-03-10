@@ -12,12 +12,12 @@ public class ChoiceSettingBuilder<T> {
     private String helpMessage;
     private final Set<T> choices = new HashSet<>();
 
-    public ChoiceSettingBuilder<T> forType(Class<T> clazz) {
+    public ChoiceSettingBuilder<T> forType(final Class<T> clazz) {
         this.valueType = clazz;
         return this;
     }
 
-    public ChoiceSettingBuilder<T> defaultValue(T defaultValue) {
+    public ChoiceSettingBuilder<T> defaultValue(final T defaultValue) {
         this.defaultValue = defaultValue;
         return this;
     }
@@ -28,7 +28,7 @@ public class ChoiceSettingBuilder<T> {
         return this;
     }
 
-    public ChoiceSettingBuilder<T> withHelpMessage(String helpMessage) {
+    public ChoiceSettingBuilder<T> withHelpMessage(final String helpMessage) {
         this.helpMessage = helpMessage;
         return this;
     }

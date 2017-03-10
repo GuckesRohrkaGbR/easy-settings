@@ -9,17 +9,17 @@ public class UnboundedSettingBuilder<T> {
     private Class<T> valueType;
     private String helpMessage;
 
-    public UnboundedSettingBuilder<T> defaultValue(T defaultValue) {
+    public UnboundedSettingBuilder<T> defaultValue(final T defaultValue) {
         this.defaultValue = defaultValue;
         return this;
     }
 
-    public UnboundedSettingBuilder<T> forType(Class<T> clazz) {
+    public UnboundedSettingBuilder<T> forType(final Class<T> clazz) {
         this.valueType = clazz;
         return this;
     }
 
-    public UnboundedSettingBuilder<T> withHelpMessage(String helpMessage) {
+    public UnboundedSettingBuilder<T> withHelpMessage(final String helpMessage) {
         this.helpMessage = helpMessage;
         return this;
     }

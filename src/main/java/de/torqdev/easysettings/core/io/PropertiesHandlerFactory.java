@@ -11,7 +11,7 @@ public final class PropertiesHandlerFactory {
         // Private Utility Class constructor
     }
 
-    public static PropertiesHandler getHandlerFor(File file) {
+    public static PropertiesHandler getHandlerFor(final File file) {
         PropertiesHandler handler = null;
 
         if(!file.getAbsolutePath().endsWith(".xml")) {

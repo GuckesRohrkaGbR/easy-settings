@@ -9,7 +9,7 @@ import javafx.util.StringConverter;
  */
 public class ColorStringConverter extends StringConverter<Color> {
     @Override
-    public String toString(Color color) {
+    public String toString(final Color color) {
         return (color == null) ? "" : String.format("#%02X%02X%02X%02X",
                 (int) (color.getRed() * 255),
                 (int) (color.getGreen() * 255),
@@ -18,7 +18,7 @@ public class ColorStringConverter extends StringConverter<Color> {
     }
 
     @Override
-    public Color fromString(String stringColor) {
+    public Color fromString(final String stringColor) {
         return (stringColor == null) ? null : Color.web(stringColor);
     }
 }

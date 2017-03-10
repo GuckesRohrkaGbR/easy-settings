@@ -28,12 +28,12 @@ public class PropertiesFileHandler implements PropertiesHandler {
         try (FileInputStream fis = new FileInputStream(propertiesFile)) {
             properties.load(fis);
             toHandle.getSettingTypes().forEach(this::updateSetting);
-        } catch (IOException e) {
+        } catch (final IOException e) {
             throw new EasySettingsException(e);
         }
     }
 
-    private void updateSetting(String key, SettingType type) {
+    private void updateSetting(final String key, final SettingType type) {
         switch (type) {
             case FILE:
                 updateFileSetting(key);
@@ -53,38 +53,38 @@ public class PropertiesFileHandler implements PropertiesHandler {
         }
     }
 
-    private void updateFileSetting(String key) {
-        String value = getValueForKey(key);
+    private void updateFileSetting(final String key) {
+        final String value = getValueForKey(key);
         toHandle.getFileSetting(key).setFromStringValue(value);
     }
 
-    private void updateUnboundedSetting(String key) {
-        String value = getValueForKey(key);
+    private void updateUnboundedSetting(final String key) {
+        final String value = getValueForKey(key);
         toHandle.getUnboundedSetting(key).setFromStringValue(value);
     }
 
-    private void updateChoiceSetting(String key) {
-        String value = getValueForKey(key);
+    private void updateChoiceSetting(final String key) {
+        final String value = getValueForKey(key);
         toHandle.getChoiceSetting(key).setFromStringValue(value);
     }
 
-    private void updateRangeSetting(String key) {
-        String value = getValueForKey(key);
+    private void updateRangeSetting(final String key) {
+        final String value = getValueForKey(key);
         toHandle.getRangeSetting(key).setFromStringValue(value);
     }
 
-    private void updateMultiselectSetting(String key) {
-        String value = getValueForKey(key);
+    private void updateMultiselectSetting(final String key) {
+        final String value = getValueForKey(key);
         toHandle.getMultiselectSetting(key).setFromStringValue(value);
     }
 
-    private String getValueForKey(String key) {
+    private String getValueForKey(final String key) {
         final String keyName = propertizeKey(key);
         return properties.getProperty(keyName);
     }
 
-    private void setValueForKey(String key, String value) {
-        String keyName = propertizeKey(key);
+    private void setValueForKey(final String key, final String value) {
+        final String keyName = propertizeKey(key);
         properties.put(keyName, value);
     }
 
@@ -94,17 +94,17 @@ public class PropertiesFileHandler implements PropertiesHandler {
 
         try (FileOutputStream fos = new FileOutputStream(propertiesFile)) {
             properties.store(fos, null);
-        } catch (IOException e) {
+        } catch (final IOException e) {
             throw new EasySettingsException(e);
         }
     }
 
-    private void saveSetting(String key) {
-        String value = valueToString(toHandle.getSetting(key));
+    private void saveSetting(final String key) {
+        final String value = valueToString(toHandle.getSetting(key));
         setValueForKey(key, value);
     }
 
-    private String valueToString(Setting<Object> setting) {
+    private String valueToString(final Setting<Object> setting) {
         return StringConverterUtil.getConverter(setting.getValueType()).toString(setting.getValue());
     }
 
@@ -113,7 +113,7 @@ public class PropertiesFileHandler implements PropertiesHandler {
     }
 
     @Override
-    public void setToHandle(Settings toHandle) {
+    public void setToHandle(final Settings toHandle) {
         this.toHandle = toHandle;
     }
 }

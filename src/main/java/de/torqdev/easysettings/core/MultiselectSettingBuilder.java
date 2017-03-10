@@ -14,7 +14,7 @@ public class MultiselectSettingBuilder<T> {
     private final Set<T> choices = new HashSet<>();
 
     @SafeVarargs
-    public final MultiselectSettingBuilder<T> defaultValue(T... defaultValue) {
+    public final MultiselectSettingBuilder<T> defaultValue(final T... defaultValue) {
         this.defaultValue.addAll(Arrays.asList(defaultValue));
         return this;
     }
@@ -25,7 +25,7 @@ public class MultiselectSettingBuilder<T> {
         return this;
     }
 
-    public MultiselectSettingBuilder<T> withHelpMessage(String helpMessage) {
+    public MultiselectSettingBuilder<T> withHelpMessage(final String helpMessage) {
         this.helpMessage = helpMessage;
         return this;
     }

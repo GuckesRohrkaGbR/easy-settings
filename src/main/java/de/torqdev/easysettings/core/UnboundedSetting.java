@@ -10,7 +10,7 @@ import static de.torqdev.easysettings.core.SettingType.UNBOUNDED;
 public class UnboundedSetting<T> implements SettingContainer<T> {
     private final Setting<T> setting;
 
-    protected UnboundedSetting(T defaultValue, Class<T> valueType, String helpMessage) {
+    protected UnboundedSetting(final T defaultValue, final Class<T> valueType, final String helpMessage) {
         setting = new Setting<>(UNBOUNDED, valueType, helpMessage);
         setValue(defaultValue);
     }
@@ -21,7 +21,7 @@ public class UnboundedSetting<T> implements SettingContainer<T> {
     }
 
     @Override
-    public void setValue(T value) {
+    public void setValue(final T value) {
         setting.setValue(value);
     }
 }
