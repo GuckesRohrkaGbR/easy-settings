@@ -20,7 +20,6 @@ public class SettingsImpl implements Settings {
     private final Map<String, MultiselectSetting<?>> multiselectSettingMap = new HashMap<>();
 
     private final Map<String, SettingType> settingsTypeMap = new LinkedHashMap<>();
-    private boolean empty;
 
     public SettingsImpl(PropertiesHandler handler) {
         this.handler = handler;

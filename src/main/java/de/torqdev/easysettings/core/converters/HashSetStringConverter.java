@@ -15,7 +15,6 @@ public class HashSetStringConverter<T> extends StringConverter<HashSet<T>> {
 
 
     public HashSetStringConverter(Class<T> type) {
-        Class<T> type1 = type;
         this.converter = StringConverterUtil.getConverter(type);
     }
 
