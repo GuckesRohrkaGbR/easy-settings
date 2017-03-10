@@ -33,9 +33,6 @@ public class SettingsImpl implements Settings {
 
         if (settingsTypeMap.containsKey(key)) {
             switch (settingsTypeMap.get(key)) {
-                case UNBOUNDED:
-                    myReturn = (Setting<T>) getUnboundedSetting(key).<T>getSetting();
-                    break;
                 case CHOICE:
                     myReturn = (Setting<T>) getChoiceSetting(key).<T>getSetting();
                     break;
@@ -49,6 +46,8 @@ public class SettingsImpl implements Settings {
                     myReturn = (Setting<T>) getRangeSetting(key).<T>getSetting();
                     break;
                 default:
+                    myReturn = (Setting<T>) getUnboundedSetting(key).<T>getSetting();
+                    break;
             }
         }
 
