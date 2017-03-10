@@ -7,6 +7,10 @@ import java.io.File;
  * @version 1.0
  */
 public final class PropertiesHandlerFactory {
+    private PropertiesHandlerFactory() {
+        // Private Utility Class constructor
+    }
+
     public static PropertiesHandler getHandlerFor(File file) {
         PropertiesHandler handler = null;
 
@@ -15,9 +19,5 @@ public final class PropertiesHandlerFactory {
         }
 
         return handler;
-    }
-
-    private PropertiesHandlerFactory() {
-        // Private Utility Class constructor
     }
 }

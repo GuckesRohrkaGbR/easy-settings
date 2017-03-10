@@ -19,6 +19,7 @@ public class ChoiceSetting<T> implements SettingContainer<T> {
         choices.add(defaultValue);
     }
 
+    @Override
     public void setValue(T value) {
         setting.setValue(value);
     }

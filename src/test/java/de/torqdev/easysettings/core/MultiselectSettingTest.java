@@ -30,7 +30,7 @@ public class MultiselectSettingTest {
     @Test
     public void choicesContainInitialSettingsAndAllOtherChoices() throws Exception {
         // setup
-        MultiselectSetting<Locale> setting = new MultiselectSetting<Locale>(CHOSEN, (Class<HashSet<Locale>>) new HashSet<Locale>().getClass(), NOT_CHOSEN, null);
+        MultiselectSetting<Locale> setting = new MultiselectSetting<Locale>(CHOSEN, Locale.class, NOT_CHOSEN, null);
 
         // execute
         Set<Locale> choices = setting.getChoices();

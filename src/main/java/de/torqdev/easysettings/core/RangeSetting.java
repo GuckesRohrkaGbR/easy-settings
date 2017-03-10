@@ -18,6 +18,7 @@ public class RangeSetting<T extends Number>implements SettingContainer<T> {
         setValue(defaultValue);
     }
 
+    @Override
     public void setValue(T defaultValue) {
         this.setting.setValue(capValue(defaultValue));
     }

@@ -7,15 +7,21 @@ import java.util.Set;
  * @author <a href="mailto:christopher.guckes@torq-dev.de">Christopher Guckes</a>
  * @version 1.0
  */
-public class MultiselectSetting<T> implements SettingContainer<HashSet<T>> {
-    private final Setting<HashSet<T>> setting;
+public class MultiselectSetting<T> implements SettingContainer<Set<T>> {
+    private final Setting<Set<T>> setting;
     private final Set<T> choices;
 
-    public MultiselectSetting(HashSet<T> defaultValue, Class<HashSet<T>> valueType, HashSet<T> choices, String helpMessage) {
-        this.setting = new Setting<>(SettingType.MULTISELECT, valueType, helpMessage);
+    public MultiselectSetting(Set<T> defaultValue, Class<T> valueType, Set<T> choices, String helpMessage) {
+        this.setting = new Setting<Set<T>>(SettingType.MULTISELECT, getSetType(), helpMessage);
         this.setValue(defaultValue);
         this.choices = choices;
         this.choices.addAll(defaultValue);
+    }
+
+    @SuppressWarnings("unchecked")
+    private Class<Set<T>> getSetType() {
+        Set<T> myReturn = new HashSet<T>();
+        return (Class<Set<T>>) myReturn.getClass();
     }
 
     public Set<T> getChoices() {
@@ -23,12 +29,12 @@ public class MultiselectSetting<T> implements SettingContainer<HashSet<T>> {
     }
 
     @Override
-    public Setting<HashSet<T>> getSetting() {
+    public Setting<Set<T>> getSetting() {
         return setting;
     }
 
     @Override
-    public void setValue(HashSet<T> value) {
+    public void setValue(Set<T> value) {
         setting.setValue(value);
     }
 }

@@ -21,6 +21,7 @@ public class FileSetting implements SettingContainer<File> {
         return setting;
     }
 
+    @Override
     public void setValue(File value) {
         this.setting.setValue(value);
     }

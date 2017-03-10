@@ -113,6 +113,7 @@ public class PropertiesFileHandler implements PropertiesHandler {
         return key.toLowerCase(Locale.ENGLISH).replaceAll("\\s+", ".");
     }
 
+    @Override
     public void setToHandle(Settings toHandle) {
         this.toHandle = toHandle;
     }

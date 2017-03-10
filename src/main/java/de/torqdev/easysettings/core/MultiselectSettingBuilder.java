@@ -2,18 +2,19 @@ package de.torqdev.easysettings.core;
 
 import java.util.Arrays;
 import java.util.HashSet;
+import java.util.Set;
 
 /**
  * @author <a href="mailto:christopher.guckes@torq-dev.de">Christopher Guckes</a>
  * @version 1.0
  */
 public class MultiselectSettingBuilder<T> {
-    private final HashSet<T> defaultValue= new HashSet<>();
-    private Class<HashSet<T>> valueType;
+    private final Set<T> defaultValue= new HashSet<>();
+    private Class<T> valueType;
     private String helpMessage;
-    private final HashSet<T> choices = new HashSet<>();
+    private final Set<T> choices = new HashSet<>();
 
-    public MultiselectSettingBuilder<T> forType(Class<HashSet<T>> clazz) {
+    public MultiselectSettingBuilder<T> forType(Class<T> clazz) {
         this.valueType = clazz;
         return this;
     }
@@ -39,6 +40,6 @@ public class MultiselectSettingBuilder<T> {
         if(!choices.containsAll(defaultValue)) {
             choices.addAll(defaultValue);
         }
-        return new MultiselectSetting<>(defaultValue, valueType, choices, helpMessage);
+        return new MultiselectSetting<T>(defaultValue, valueType, choices, helpMessage);
     }
 }

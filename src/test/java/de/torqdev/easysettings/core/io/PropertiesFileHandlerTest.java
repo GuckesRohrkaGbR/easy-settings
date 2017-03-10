@@ -9,10 +9,7 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 import java.io.File;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.Locale;
+import java.util.*;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
@@ -175,7 +172,7 @@ public class PropertiesFileHandlerTest {
 
         MultiselectSettingBuilder<Locale> msBuilder = new MultiselectSettingBuilder<>();
         MultiselectSetting<Locale> setting5 = msBuilder
-                .forType((Class<HashSet<Locale>>) new HashSet<Locale>().getClass())
+                .forType(Locale.class)
                 .defaultValue(Locale.GERMANY, Locale.ENGLISH)
                 .addChoices(Locale.CANADA, Locale.CHINA)
                 .withHelpMessage(HELP_MESSAGE)
