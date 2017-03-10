@@ -172,7 +172,6 @@ public class PropertiesFileHandlerTest {
 
         MultiselectSettingBuilder<Locale> msBuilder = new MultiselectSettingBuilder<>();
         MultiselectSetting<Locale> setting5 = msBuilder
-                .forType(Locale.class)
                 .defaultValue(Locale.GERMANY, Locale.ENGLISH)
                 .addChoices(Locale.CANADA, Locale.CHINA)
                 .withHelpMessage(HELP_MESSAGE)

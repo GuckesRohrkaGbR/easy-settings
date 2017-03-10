@@ -34,9 +34,6 @@ public class ChoiceSettingBuilder<T> {
     }
 
     public ChoiceSetting<T> build() {
-        if(!choices.contains(defaultValue)) {
-            choices.add(defaultValue);
-        }
         return new ChoiceSetting<>(defaultValue, valueType, choices, helpMessage);
     }
 }

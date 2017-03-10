@@ -20,11 +20,15 @@ public class HashSetStringConverter<T> extends StringConverter<HashSet<T>> {
 
     @Override
     public String toString(final HashSet<T> set) {
-        return set.stream().map(converter::toString).collect(Collectors.joining(","));
+        return (set == null) ? "" : set.stream().map(converter::toString).collect(Collectors.joining(","));
     }
 
     @Override
     public HashSet<T> fromString(final String stringSet) {
+        if(stringSet == null) {
+            return null;
+        }
+
         String set = sanitize(stringSet);
 
         HashSet<T> hashSet = new HashSet<>();

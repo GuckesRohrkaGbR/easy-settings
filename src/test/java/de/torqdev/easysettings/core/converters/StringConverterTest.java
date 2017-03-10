@@ -1,9 +1,10 @@
 package de.torqdev.easysettings.core.converters;
 
 import javafx.util.StringConverter;
+import org.hamcrest.Matchers;
 import org.junit.Test;
 
-import static org.hamcrest.CoreMatchers.equalTo;
+import static org.hamcrest.CoreMatchers.*;
 import static org.hamcrest.MatcherAssert.assertThat;
 
 /**
@@ -30,5 +31,35 @@ public abstract class StringConverterTest<T> {
     @Test
     public void canTranslateFromString() throws Exception {
         assertThat(testObject.fromString(stringRepresentation), equalTo(object));
+    }
+
+    @Test
+    public void translatesToStringAndBack() throws Exception {
+        // execute
+        String string = testObject.toString(object);
+        T stringObject = testObject.fromString(string);
+
+        // verify
+        assertThat(stringObject, Matchers.equalTo(object));
+    }
+
+    @Test
+    public void translatesFromStringAndBack() throws Exception {
+        // execute
+        T stringObject = testObject.fromString(stringRepresentation);
+        String string = testObject.toString(object);
+
+        // verify
+        assertThat(string, Matchers.equalTo(stringRepresentation));
+    }
+
+    @Test
+    public void nullToStringIsNeverNull() throws Exception {
+        assertThat(testObject.toString(null), notNullValue());
+    }
+
+    @Test
+    public void fromStringWithNullReturnsNull() throws Exception {
+        assertThat(testObject.fromString(null), nullValue());
     }
 }

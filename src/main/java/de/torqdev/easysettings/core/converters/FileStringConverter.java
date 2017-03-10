@@ -11,7 +11,7 @@ import java.io.File;
 public class FileStringConverter extends StringConverter<File> {
     @Override
     public String toString(final File file) {
-        return (file == null) ? null : file.toString();
+        return (file == null) ? "" : file.toString();
     }
 
     @Override

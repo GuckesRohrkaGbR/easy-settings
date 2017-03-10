@@ -20,7 +20,20 @@ public class RangeSettingTest {
 
     @Test
     public void capsToLowerBound() throws Exception {
+        // execute
+        rangeSetting.setValue(0.0);
+
+        // verify
         assertThat(rangeSetting.getSetting().getValue(), equalTo(2.0));
+    }
+
+    @Test
+    public void capsToUpperBound() throws Exception {
+        // execute
+        rangeSetting.setValue(6.0);
+
+        // verify
+        assertThat(rangeSetting.getSetting().getValue(), equalTo(4.0));
     }
 
     @Test

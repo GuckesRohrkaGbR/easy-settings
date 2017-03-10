@@ -10,14 +10,8 @@ import java.util.Set;
  */
 public class MultiselectSettingBuilder<T> {
     private final Set<T> defaultValue= new HashSet<>();
-    private Class<T> valueType;
     private String helpMessage;
     private final Set<T> choices = new HashSet<>();
-
-    public MultiselectSettingBuilder<T> forType(Class<T> clazz) {
-        this.valueType = clazz;
-        return this;
-    }
 
     @SafeVarargs
     public final MultiselectSettingBuilder<T> defaultValue(T... defaultValue) {
@@ -40,6 +34,6 @@ public class MultiselectSettingBuilder<T> {
         if(!choices.containsAll(defaultValue)) {
             choices.addAll(defaultValue);
         }
-        return new MultiselectSetting<T>(defaultValue, valueType, choices, helpMessage);
+        return new MultiselectSetting<T>(defaultValue, choices, helpMessage);
     }
 }

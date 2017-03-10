@@ -10,14 +10,15 @@ import javafx.util.StringConverter;
 public class ColorStringConverter extends StringConverter<Color> {
     @Override
     public String toString(Color color) {
-        return String.format( "#%02X%02X%02X",
-                (int)( color.getRed() * 255 ),
-                (int)( color.getGreen() * 255 ),
-                (int)( color.getBlue() * 255 ) );
+        return (color == null) ? "" : String.format("#%02X%02X%02X%02X",
+                (int) (color.getRed() * 255),
+                (int) (color.getGreen() * 255),
+                (int) (color.getBlue() * 255),
+                (int) (color.getOpacity() * 255));
     }
 
     @Override
     public Color fromString(String stringColor) {
-        return Color.web(stringColor);
+        return (stringColor == null) ? null : Color.web(stringColor);
     }
 }

@@ -1,5 +1,7 @@
 package de.torqdev.easysettings.core.converters;
 
+import org.junit.Test;
+
 import java.io.File;
 
 /**

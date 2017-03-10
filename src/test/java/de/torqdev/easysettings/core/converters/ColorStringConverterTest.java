@@ -18,7 +18,13 @@ import static org.hamcrest.Matchers.equalTo;
  * @version 1.0
  */
 @RunWith(Parameterized.class)
-public class ColorStringConverterTest {
+public class ColorStringConverterTest extends StringConverterTest<Color> {
+    private static final ColorStringConverter converter = new ColorStringConverter();
+
+    public ColorStringConverterTest(Color color) {
+        super(converter.toString(color), color, converter);
+    }
+
     @Parameters
     public static Iterable<? extends Object> data() {
         Field[] fields = Color.class.getDeclaredFields();
@@ -34,31 +40,5 @@ public class ColorStringConverterTest {
                     return myReturn;
                 })
                 .collect(Collectors.toList());
-    }
-
-    private final Color testColor;
-    private final ColorStringConverter converter = new ColorStringConverter();
-
-
-    public ColorStringConverterTest(Color color) {
-        testColor = color;
-    }
-
-    @Test
-    public void translatingColorToStringAndBackWorks() throws Exception {
-        Color color = Color.BURLYWOOD;
-        String colorString = converter.toString(color);
-        Color stringColor = converter.fromString(colorString);
-
-        assertThat("Error converting color: " + color, stringColor, equalTo(color));
-    }
-
-    @Test
-    public void translatingStringToColorAndBackWorks() throws Exception {
-        String string = converter.toString(testColor);
-        Color stringColor = converter.fromString(string);
-        String colorString = converter.toString(stringColor);
-
-        assertThat("Error converting string: " + string, colorString, equalTo(string));
     }
 }

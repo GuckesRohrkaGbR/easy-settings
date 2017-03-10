@@ -12,11 +12,11 @@ public class LocaleStringConverter extends StringConverter<Locale> {
 
     @Override
     public String toString(final Locale locale) {
-        return locale.toLanguageTag();
+        return (locale == null) ? "" : locale.toLanguageTag();
     }
 
     @Override
     public Locale fromString(final String languageTag) {
-        return Locale.forLanguageTag(languageTag);
+        return (languageTag == null) ? null : Locale.forLanguageTag(languageTag);
     }
 }
