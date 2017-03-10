@@ -1,9 +1,6 @@
 package de.torqdev.easysettings.core.io;
 
 import de.torqdev.easysettings.core.Settings;
-import org.jetbrains.annotations.Contract;
-
-import java.io.File;
 
 /**
  * @author <a href="mailto:christopher.guckes@torq-dev.de">Christopher Guckes</a>

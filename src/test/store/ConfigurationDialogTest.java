@@ -1,7 +1,7 @@
 package de.torqdev.easysettings.gui.javafx;
 
 import de.torqdev.easysettings.core.SettingBuilder;
-import de.torqdev.easysettings.core.Settings;
+import de.torqdev.easysettings.core.SettingsImpl;
 import de.torqdev.easysettings.matchers.ChoiceBoxMatcher;
 import de.torqdev.easysettings.matchers.SliderMatcher;
 import javafx.application.Platform;
@@ -74,7 +74,7 @@ public class ConfigurationDialogTest extends ApplicationTest {
         Button openDialogButton = new Button("Open Dialog");
         openDialogButton.setId("testButton");
         openDialogButton.setOnAction(event -> {
-            Optional<Settings> newSettings = testObject.showAndWait();
+            Optional<SettingsImpl> newSettings = testObject.showAndWait();
             newSettings.ifPresent(settings -> resultSettings = settings);
         });
         Button closeApplicationButton = new Button("Close");
@@ -90,13 +90,13 @@ public class ConfigurationDialogTest extends ApplicationTest {
     }
 
     private ConfigurationDialog testObject;
-    private Settings resultSettings;
+    private SettingsImpl resultSettings;
 
     @Before
     public void setUp() throws Exception {
         resultSettings = null;
 
-        final Settings settings = new Settings();
+        final SettingsImpl settings = new SettingsImpl();
         settings.addSetting(STRING_SETTING, builder
                 .<String>unboundedSetting()
                 .forType(String.class)

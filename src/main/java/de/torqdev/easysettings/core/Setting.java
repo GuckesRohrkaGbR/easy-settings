@@ -1,7 +1,5 @@
 package de.torqdev.easysettings.core;
 
-import de.torqdev.easysettings.core.converters.StringConverterUtil;
-import javafx.util.StringConverter;
 import org.jetbrains.annotations.Contract;
 
 import static org.apache.commons.lang.StringUtils.defaultString;

@@ -25,6 +25,7 @@ import static org.hamcrest.Matchers.*;
  * @author <a href="mailto:christopher.guckes@torq-dev.de">Christopher Guckes</a>
  * @version 1.0
  */
+@SuppressWarnings("ConstantConditions")
 public class SettingsIT {
     private static final File CSV_FILE = new File(
             SettingsIT.class
@@ -45,13 +46,8 @@ public class SettingsIT {
     private Settings testObject;
 
     @BeforeClass
-    public static void setUpTestFile() throws IOException {
-        DEFAULT_FILE.createNewFile();
-    }
-
-    @BeforeClass
     public static void registerHashMapStringConverter() {
-        StringConverterUtil.registerStringConverter(new HashSet<Locale>().getClass(), new HashSetStringConverter<Locale>(Locale.class));
+        StringConverterUtil.registerStringConverter(new HashSet<Locale>().getClass(), new HashSetStringConverter<>(Locale.class));
     }
 
     @Before

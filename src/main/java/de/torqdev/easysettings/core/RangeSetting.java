@@ -12,7 +12,7 @@ public class RangeSetting<T extends Number>implements SettingContainer<T> {
     private final Setting<T> setting;
 
     protected RangeSetting(T defaultValue, Class<T> valueType, T min, T max, String helpMessage) {
-        this.setting = new Setting<T>(RANGE, valueType, helpMessage);
+        this.setting = new Setting<>(RANGE, valueType, helpMessage);
         this.min = min;
         this.max = max;
         setValue(defaultValue);

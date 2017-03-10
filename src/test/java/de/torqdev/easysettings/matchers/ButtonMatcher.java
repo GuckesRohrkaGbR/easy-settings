@@ -13,7 +13,7 @@ import static org.testfx.matcher.base.GeneralMatchers.typeSafeMatcher;
  * @author <a href="mailto:christopher.guckes@torq-dev.de">Christopher Guckes</a>
  * @version 1.0
  */
-public class ButtonMatcher {
+public final class ButtonMatcher {
     @Factory
     public static Matcher<Node> cancelButton() {
         return typeSafeMatcher(Button.class, "is cancel button", Button::isCancelButton);

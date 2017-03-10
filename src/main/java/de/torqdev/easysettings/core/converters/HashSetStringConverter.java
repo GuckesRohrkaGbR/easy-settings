@@ -11,12 +11,11 @@ import java.util.stream.Collectors;
  * @version 1.0
  */
 public class HashSetStringConverter<T> extends StringConverter<HashSet<T>> {
-    private final Class<T> type;
     private final StringConverter<T> converter;
 
 
     public HashSetStringConverter(Class<T> type) {
-        this.type = type;
+        Class<T> type1 = type;
         this.converter = StringConverterUtil.getConverter(type);
     }
 
@@ -29,7 +28,7 @@ public class HashSetStringConverter<T> extends StringConverter<HashSet<T>> {
     public HashSet<T> fromString(final String stringSet) {
         String set = sanitize(stringSet);
 
-        HashSet<T> hashSet = new HashSet<T>();
+        HashSet<T> hashSet = new HashSet<>();
 
         Arrays.stream(set.split(","))
                 .map(String::trim)

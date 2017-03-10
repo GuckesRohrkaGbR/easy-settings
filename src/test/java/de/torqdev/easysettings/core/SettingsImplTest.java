@@ -9,6 +9,7 @@ import java.io.File;
  * @author <a href="mailto:christopher.guckes@torq-dev.de">Christopher Guckes</a>
  * @version 1.0
  */
+@SuppressWarnings("ConstantConditions")
 public class SettingsImplTest extends SettingsTest {
     private static final File CSV_FILE = new File(
             SettingsIT.class

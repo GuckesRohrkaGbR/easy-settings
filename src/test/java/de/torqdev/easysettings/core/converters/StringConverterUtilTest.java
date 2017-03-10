@@ -17,7 +17,7 @@ import static org.junit.Assert.assertTrue;
  * @version 1.0
  */
 public class StringConverterUtilTest {
-    StringConverter<Number> converter = new NumberStringConverter();
+    private StringConverter<Number> converter = new NumberStringConverter();
 
     @Test
     public void canAddNewStringConverter() throws Exception {

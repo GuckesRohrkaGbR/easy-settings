@@ -21,17 +21,17 @@ import java.util.concurrent.ConcurrentHashMap;
  * @author Christopher Guckes (christopher.guckes@torq-dev.de)
  * @version 1.0
  */
-public class ConfigurationDialog extends Dialog<Settings> {
+public class ConfigurationDialog extends Dialog<SettingsImpl> {
     private static final ResourceBundle STR = ResourceBundle.getBundle("i18n.EasySettings", Locale.getDefault());
 
-    private final Settings settings;
+    private final SettingsImpl settings;
     private final Map<String, Node> inputFields = new ConcurrentHashMap<>();
 
-    public ConfigurationDialog(final Settings settings) {
+    public ConfigurationDialog(final SettingsImpl settings) {
         this(settings, STR.getString("configure"), null, null);
     }
 
-    public ConfigurationDialog(final Settings settings, String title, String headerText, ImageView icon) {
+    public ConfigurationDialog(final SettingsImpl settings, String title, String headerText, ImageView icon) {
         super();
         this.settings = settings;
 
@@ -48,7 +48,7 @@ public class ConfigurationDialog extends Dialog<Settings> {
         this.getDialogPane().getButtonTypes().addAll(saveButton, ButtonType.CANCEL);
 
         this.setResultConverter(buttonType -> {
-            Settings myReturn = null;
+            SettingsImpl myReturn = null;
             if (buttonType == saveButton) {
                 myReturn = updateSettings();
             }
@@ -57,8 +57,8 @@ public class ConfigurationDialog extends Dialog<Settings> {
     }
 
     @Contract("-> !null")
-    private Settings updateSettings() {
-        Settings myReturn;
+    private SettingsImpl updateSettings() {
+        SettingsImpl myReturn;
 
         final Map<String, Setting<?>> settingsMap = settings.getSettings();
         settingsMap.keySet().forEach(key -> updateSetting(key, settingsMap));

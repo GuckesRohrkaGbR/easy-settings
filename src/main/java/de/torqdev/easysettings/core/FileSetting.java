@@ -9,7 +9,7 @@ import static de.torqdev.easysettings.core.SettingType.FILE;
  * @version 1.0
  */
 public class FileSetting implements SettingContainer<File> {
-    private Setting<File> setting;
+    private final Setting<File> setting;
 
     public FileSetting(File defaultFile, String helpMessage) {
         this.setting = new Setting<>(FILE, File.class, helpMessage);

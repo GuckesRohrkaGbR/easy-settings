@@ -7,7 +7,7 @@ import java.io.File;
  * @version 1.0
  */
 public final class PropertiesHandlerFactory {
-    public static final PropertiesHandler getHandlerFor(File file) {
+    public static PropertiesHandler getHandlerFor(File file) {
         PropertiesHandler handler = null;
 
         if(!file.getAbsolutePath().endsWith(".xml")) {

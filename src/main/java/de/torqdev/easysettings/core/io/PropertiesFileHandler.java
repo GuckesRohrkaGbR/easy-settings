@@ -2,7 +2,6 @@ package de.torqdev.easysettings.core.io;
 
 import de.torqdev.easysettings.core.*;
 import de.torqdev.easysettings.core.converters.StringConverterUtil;
-import javafx.util.StringConverter;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -18,7 +17,7 @@ import java.util.Properties;
 public class PropertiesFileHandler implements PropertiesHandler {
     private final File propertiesFile;
     private Settings toHandle;
-    private Properties properties = new Properties();
+    private final Properties properties = new Properties();
 
     public PropertiesFileHandler(final File propertiesFile) {
         this.propertiesFile = propertiesFile;

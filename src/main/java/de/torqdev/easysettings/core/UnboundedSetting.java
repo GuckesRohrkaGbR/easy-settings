@@ -10,7 +10,7 @@ public class UnboundedSetting<T> implements SettingContainer<T> {
     private final Setting<T> setting;
 
     protected UnboundedSetting(T defaultValue, Class<T> valueType, String helpMessage) {
-        setting = new Setting<T>(UNBOUNDED, valueType, helpMessage);
+        setting = new Setting<>(UNBOUNDED, valueType, helpMessage);
         setValue(defaultValue);
     }
 

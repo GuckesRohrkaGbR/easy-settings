@@ -12,7 +12,7 @@ import static org.testfx.matcher.base.GeneralMatchers.typeSafeMatcher;
  * @author <a href="mailto:christopher.guckes@torq-dev.de">Christopher Guckes</a>
  * @version 1.0
  */
-public class ChoiceBoxMatcher {
+public final class ChoiceBoxMatcher {
     @NotNull
     @Factory
     public static Matcher<Node> hasItems(int amount) {

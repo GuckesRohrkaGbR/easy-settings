@@ -11,7 +11,7 @@ import static org.testfx.matcher.base.GeneralMatchers.typeSafeMatcher;
  * @author <a href="mailto:christopher.guckes@torq-dev.de">Christopher Guckes</a>
  * @version 1.0
  */
-public class SliderMatcher {
+public final class SliderMatcher {
     @Factory
     public static Matcher<Node> fromTo(Double min, Double max) {
         String descriptionText = "goes from " + min + " to " + max;
