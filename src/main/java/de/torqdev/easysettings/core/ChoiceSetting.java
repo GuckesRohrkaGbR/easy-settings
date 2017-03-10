@@ -16,6 +16,7 @@ public class ChoiceSetting<T> implements SettingContainer<T> {
         setting = new Setting<>(CHOICE, valueType, helpMessage);
         setValue(defaultValue);
         this.choices = choices;
+        choices.add(defaultValue);
     }
 
     public void setValue(T value) {
