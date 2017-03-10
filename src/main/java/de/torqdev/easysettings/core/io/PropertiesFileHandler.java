@@ -35,9 +35,6 @@ public class PropertiesFileHandler implements PropertiesHandler {
 
     private void updateSetting(String key, SettingType type) {
         switch (type) {
-            case UNBOUNDED:
-                updateUnboundedSetting(key);
-                break;
             case FILE:
                 updateFileSetting(key);
                 break;
@@ -51,6 +48,8 @@ public class PropertiesFileHandler implements PropertiesHandler {
                 updateMultiselectSetting(key);
                 break;
             default:
+                updateUnboundedSetting(key);
+                break;
         }
     }
 
