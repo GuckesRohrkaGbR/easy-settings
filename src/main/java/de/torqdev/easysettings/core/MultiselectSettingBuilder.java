@@ -31,9 +31,6 @@ public class MultiselectSettingBuilder<T> {
     }
 
     public MultiselectSetting<T> build() {
-        if(!choices.containsAll(defaultValue)) {
-            choices.addAll(defaultValue);
-        }
-        return new MultiselectSetting<T>(defaultValue, choices, helpMessage);
+        return new MultiselectSetting<>(defaultValue, choices, helpMessage);
     }
 }

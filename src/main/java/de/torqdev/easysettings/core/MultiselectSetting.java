@@ -12,7 +12,7 @@ public class MultiselectSetting<T> implements SettingContainer<Set<T>> {
     private final Set<T> choices;
 
     public MultiselectSetting(Set<T> defaultValue, Set<T> choices, String helpMessage) {
-        this.setting = new Setting<Set<T>>(SettingType.MULTISELECT, getSetType(), helpMessage);
+        this.setting = new Setting<>(SettingType.MULTISELECT, getSetType(), helpMessage);
         this.setValue(defaultValue);
         this.choices = choices;
         this.choices.addAll(defaultValue);
@@ -20,7 +20,8 @@ public class MultiselectSetting<T> implements SettingContainer<Set<T>> {
 
     @SuppressWarnings("unchecked")
     private Class<Set<T>> getSetType() {
-        Set<T> myReturn = new HashSet<T>();
+        @SuppressWarnings("MismatchedQueryAndUpdateOfCollection")
+        Set<T> myReturn = new HashSet<>();
         return (Class<Set<T>>) myReturn.getClass();
     }
 
