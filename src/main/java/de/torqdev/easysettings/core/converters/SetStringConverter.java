@@ -26,18 +26,14 @@ public class SetStringConverter<T> extends StringConverter<Set<T>> {
 
     @Override
     public Set<T> fromString(final String stringSet) {
-        if(stringSet == null) {
-            return null;
-        }
-
-        final String set = sanitize(stringSet);
-
         final Set<T> hashSet = new HashSet<>();
-
-        Arrays.stream(set.split(","))
-                .map(String::trim)
-                .map(converter::fromString)
-                .forEach(hashSet::add);
+        if(stringSet != null) {
+            final String set = sanitize(stringSet);
+            Arrays.stream(set.split(","))
+                    .map(String::trim)
+                    .map(converter::fromString)
+                    .forEach(hashSet::add);
+        }
 
         return hashSet;
     }
@@ -45,6 +41,4 @@ public class SetStringConverter<T> extends StringConverter<Set<T>> {
     private String sanitize(final String stringSet) {
         return stringSet.replace("\\s", "").replace("[", "").replace("]", "");
     }
-
-
 }

@@ -8,6 +8,7 @@ import static de.torqdev.easysettings.core.SettingType.FILE;
  * @author <a href="mailto:christopher.guckes@torq-dev.de">Christopher Guckes</a>
  * @version 1.0
  */
+@SuppressWarnings("WeakerAccess")
 public class FileSetting implements SettingContainer<File> {
     private final Setting<File> setting;
 

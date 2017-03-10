@@ -4,8 +4,11 @@ import javafx.util.StringConverter;
 import org.hamcrest.Matchers;
 import org.junit.Test;
 
+import java.util.Collection;
+
 import static org.hamcrest.CoreMatchers.*;
 import static org.hamcrest.MatcherAssert.assertThat;
+import static org.junit.Assert.assertTrue;
 
 /**
  * @author <a href="mailto:christopher.guckes@torq-dev.de">Christopher Guckes</a>
@@ -59,7 +62,13 @@ public abstract class StringConverterTest<T> {
     }
 
     @Test
-    public void fromStringWithNullReturnsNull() throws Exception {
-        assertThat(testObject.fromString(null), nullValue());
+    public void fromStringWithNullReturnsNullOrEmptyCollection() throws Exception {
+        T object = testObject.fromString(null);
+        if(object == null) {
+            assertThat(object, nullValue());
+        } else {
+            assertTrue(Collection.class.isAssignableFrom(object.getClass()));
+            assertThat(((Collection) object).size(), equalTo(0));
+        }
     }
 }
