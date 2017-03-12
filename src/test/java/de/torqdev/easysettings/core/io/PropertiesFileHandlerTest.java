@@ -33,6 +33,7 @@ public class PropertiesFileHandlerTest {
     @BeforeClass
     public static void registerSetStringConverter() {
         StringConverterUtil.registerStringConverter(Set.class, new SetStringConverter<>(Locale.class));
+        StringConverterUtil.registerStringConverter(HashSet.class, new SetStringConverter<>(Locale.class));
     }
 
     @Before
