@@ -285,8 +285,7 @@ public class ConfigurationDialogTest extends ApplicationTest {
 
     @Test
     public void savingFileOptionWorks() throws Exception {
-        final File originalFile = new File(System.getProperty("java.io.tmpdir") + "/file");
-        final Optional<Label> label = lookup(originalFile.getPath()).tryQuery();
+        final Optional<Label> label = lookup(DEFAULT_FILE.getPath()).tryQuery();
         assertTrue(label.isPresent());
 
         if (label.isPresent()) {
@@ -309,7 +308,7 @@ public class ConfigurationDialogTest extends ApplicationTest {
                 (new File("/new/file")).getPath()));
 
         // restore
-        resultSettings.getFileSetting(FILE_SETTING).setValue(originalFile);
+        resultSettings.getFileSetting(FILE_SETTING).setValue(DEFAULT_FILE);
         resultSettings.save();
     }
 
