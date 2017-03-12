@@ -17,13 +17,13 @@ import static org.junit.Assert.assertTrue;
  * @version 1.0
  */
 public class StringConverterUtilTest {
-    private StringConverter<Number> converter = new NumberStringConverter();
+    private final StringConverter<Number> converter = new NumberStringConverter();
 
     @Test
     public void canAddNewStringConverter() throws Exception {
         StringConverterUtil.registerStringConverter(Byte.class, converter);
 
-        StringConverter<Byte> newConverter = StringConverterUtil.getConverter(Byte.class);
+        final StringConverter<Byte> newConverter = StringConverterUtil.getConverter(Byte.class);
 
         assertThat(newConverter.toString((byte) 5), equalTo("5"));
     }
@@ -35,7 +35,7 @@ public class StringConverterUtilTest {
 
     @Test
     public void coverPrivateConstructor() throws Exception {
-        Constructor<?> constructor  = StringConverterUtil.class.getDeclaredConstructor();
+        final Constructor<?> constructor  = StringConverterUtil.class.getDeclaredConstructor();
         assertTrue(Modifier.isPrivate(constructor.getModifiers()));
         constructor.setAccessible(true);
         constructor.newInstance();

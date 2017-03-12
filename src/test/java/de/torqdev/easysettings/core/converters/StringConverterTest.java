@@ -20,7 +20,7 @@ public abstract class StringConverterTest<T> {
 
     private final StringConverter<T> testObject;
 
-    StringConverterTest(String stringRepresentation, T object, StringConverter<T> testObject) {
+    StringConverterTest(final String stringRepresentation, final T object, final StringConverter<T> testObject) {
         this.stringRepresentation = stringRepresentation;
         this.object = object;
         this.testObject = testObject;
@@ -39,8 +39,8 @@ public abstract class StringConverterTest<T> {
     @Test
     public void translatesToStringAndBack() throws Exception {
         // execute
-        String string = testObject.toString(object);
-        T stringObject = testObject.fromString(string);
+        final String string = testObject.toString(object);
+        final T stringObject = testObject.fromString(string);
 
         // verify
         assertThat(stringObject, Matchers.equalTo(object));
@@ -49,8 +49,8 @@ public abstract class StringConverterTest<T> {
     @Test
     public void translatesFromStringAndBack() throws Exception {
         // execute
-        T stringObject = testObject.fromString(stringRepresentation);
-        String string = testObject.toString(object);
+        final T stringObject = testObject.fromString(stringRepresentation);
+        final String string = testObject.toString(object);
 
         // verify
         assertThat(string, Matchers.equalTo(stringRepresentation));
@@ -63,10 +63,8 @@ public abstract class StringConverterTest<T> {
 
     @Test
     public void fromStringWithNullReturnsNullOrEmptyCollection() throws Exception {
-        T object = testObject.fromString(null);
-        if(object == null) {
-            assertThat(object, nullValue());
-        } else {
+        final T object = testObject.fromString(null);
+        if(object != null) {
             assertTrue(Collection.class.isAssignableFrom(object.getClass()));
             assertThat(((Collection) object).size(), equalTo(0));
         }

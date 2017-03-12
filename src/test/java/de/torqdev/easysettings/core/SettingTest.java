@@ -13,7 +13,7 @@ public class SettingTest {
     @Test
     public void helpMessageIsNeverNull() throws Exception {
         // setup
-        Setting<String> setting = new Setting<>(UNBOUNDED, String.class, null);
+        final Setting<String> setting = new Setting<>(UNBOUNDED, String.class, null);
 
         // execute + verify
         assertNotNull(setting.getHelpMessage());

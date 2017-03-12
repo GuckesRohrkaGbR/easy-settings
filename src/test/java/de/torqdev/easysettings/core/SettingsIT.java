@@ -15,8 +15,10 @@ import java.nio.file.Files;
 import java.util.HashSet;
 import java.util.Locale;
 import java.util.Map;
+import java.util.Set;
 
 import static de.torqdev.easysettings.core.SettingType.*;
+import static de.torqdev.easysettings.core.SettingsTestUtil.*;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
@@ -34,20 +36,13 @@ public class SettingsIT {
                     .getFile()
     );
     private static final PropertiesHandler HANDLER = PropertiesHandlerFactory.getHandlerFor(PROPERTIES_FILE);
-    private static final String UNBOUNDED_SETTING = "Unbounded Setting";
-    private static final String HELP_MESSAGE = "Help Message";
-    private static final String DEFAULT_VALUE = "Default Value";
-    private static final String CHOICE_SETTING = "Choice Setting";
-    private static final String RANGE_SETTING = "Range Setting";
-    private static final String MULTISELECT_SETTING = "Multiselect Setting";
-    private static final String FILE_SETTING = "File Setting";
-    private static final File DEFAULT_FILE = new File(System.getProperty("java.io.tmpdir") + "file");
 
     private Settings testObject;
 
     @BeforeClass
     public static void registerHashMapStringConverter() {
-        StringConverterUtil.registerStringConverter(new HashSet<Locale>().getClass(), new SetStringConverter<>(Locale.class));
+        StringConverterUtil.registerStringConverter(Set.class, new SetStringConverter<>(Locale.class));
+        StringConverterUtil.registerStringConverter(HashSet.class, new SetStringConverter<>(Locale.class));
     }
 
     @Before
@@ -58,8 +53,8 @@ public class SettingsIT {
     @Test
     public void canCreateUnboundedSetting() throws Exception {
         // setup
-        UnboundedSettingBuilder<String> usBuilder = new UnboundedSettingBuilder<>();
-        UnboundedSetting<String> setting = usBuilder
+        final UnboundedSettingBuilder<String> usBuilder = new UnboundedSettingBuilder<>();
+        final UnboundedSetting<String> setting = usBuilder
                 .forType(String.class)
                 .defaultValue("Default Value")
                 .withHelpMessage(HELP_MESSAGE)
@@ -75,8 +70,8 @@ public class SettingsIT {
     @Test
     public void canCreateChoiceSetting() throws Exception {
         // setup
-        ChoiceSettingBuilder<Color> csBuilder = new ChoiceSettingBuilder<>();
-        ChoiceSetting<Color> setting = csBuilder
+        final ChoiceSettingBuilder<Color> csBuilder = new ChoiceSettingBuilder<>();
+        final ChoiceSetting<Color> setting = csBuilder
                 .forType(Color.class)
                 .defaultValue(Color.BLACK)
                 .addChoices(Color.RED, Color.GREEN, Color.BLUE)
@@ -93,8 +88,8 @@ public class SettingsIT {
     @Test
     public void canCreateRangeSetting() throws Exception {
         // setup
-        RangeSettingBuilder<Double> rsBuilder = new RangeSettingBuilder<>();
-        RangeSetting<Double> setting = rsBuilder
+        final RangeSettingBuilder<Double> rsBuilder = new RangeSettingBuilder<>();
+        final RangeSetting<Double> setting = rsBuilder
                 .forType(Double.class)
                 .defaultValue(1.0)
                 .lowerBound(0.0)
@@ -112,8 +107,8 @@ public class SettingsIT {
     @Test
     public void canCreateMultiselectSetting() throws Exception {
         // setup
-        MultiselectSettingBuilder<Locale> msBuilder = new MultiselectSettingBuilder<>();
-        MultiselectSetting<Locale> setting = msBuilder
+        final MultiselectSettingBuilder<Locale> msBuilder = new MultiselectSettingBuilder<>();
+        final MultiselectSetting<Locale> setting = msBuilder
                 .defaultValue(Locale.GERMANY, Locale.ENGLISH)
                 .addChoices(Locale.CANADA, Locale.CHINA)
                 .withHelpMessage(HELP_MESSAGE)
@@ -129,8 +124,8 @@ public class SettingsIT {
     @Test
     public void canCreateFileSetting() throws Exception {
         // setup
-        FileSettingBuilder fsBuilder = new FileSettingBuilder();
-        FileSetting setting = fsBuilder
+        final FileSettingBuilder fsBuilder = new FileSettingBuilder();
+        final FileSetting setting = fsBuilder
                 .defaultValue(DEFAULT_FILE)
                 .withHelpMessage(HELP_MESSAGE)
                 .build();
@@ -148,7 +143,7 @@ public class SettingsIT {
         fillSettings(testObject);
 
         // execute
-        Map<String, SettingType> settingsWithType = testObject.getSettingTypes();
+        final Map<String, SettingType> settingsWithType = testObject.getSettingTypes();
 
         // verify
         assertThat(settingsWithType, hasEntry(UNBOUNDED_SETTING, UNBOUNDED));
@@ -164,7 +159,7 @@ public class SettingsIT {
         fillSettings(testObject);
 
         // execute
-        Map<String, SettingType> settingsWithType = testObject.getSettingTypes();
+        final Map<String, SettingType> settingsWithType = testObject.getSettingTypes();
 
         // verify
         assertThat(settingsWithType.keySet(), contains(UNBOUNDED_SETTING, RANGE_SETTING, CHOICE_SETTING, FILE_SETTING, MULTISELECT_SETTING));
@@ -179,7 +174,7 @@ public class SettingsIT {
         testObject.save();
 
         // verify
-        String content = new String(Files.readAllBytes(PROPERTIES_FILE.toPath()));
+        final String content = new String(Files.readAllBytes(PROPERTIES_FILE.toPath()));
         assertThat(content, containsString(DEFAULT_VALUE));
     }
 
@@ -189,11 +184,11 @@ public class SettingsIT {
         fillSettings(testObject);
 
         // execute
-        Setting<String> unbounded = testObject.getSetting(UNBOUNDED_SETTING);
-        Setting<Double> range = testObject.getSetting(RANGE_SETTING);
-        Setting<Color> choice = testObject.getSetting(CHOICE_SETTING);
-        Setting<File> file = testObject.getSetting(FILE_SETTING);
-        Setting<HashSet<Locale>> multiselect = testObject.getSetting(MULTISELECT_SETTING);
+        final Setting<String> unbounded = testObject.getSetting(UNBOUNDED_SETTING);
+        final Setting<Double> range = testObject.getSetting(RANGE_SETTING);
+        final Setting<Color> choice = testObject.getSetting(CHOICE_SETTING);
+        final Setting<File> file = testObject.getSetting(FILE_SETTING);
+        final Setting<Set<Locale>> multiselect = testObject.getSetting(MULTISELECT_SETTING);
 
         // verify
         assertThat(unbounded.getValue(), equalTo(DEFAULT_VALUE));
@@ -212,15 +207,15 @@ public class SettingsIT {
         testObject.save();
 
         // execute
-        Settings newSettings = new SettingsImpl(new PropertiesFileHandler(PROPERTIES_FILE));
+        final Settings newSettings = new SettingsImpl(new PropertiesFileHandler(PROPERTIES_FILE));
         fillSettings(newSettings);
         newSettings.load();
 
-        Setting<String> unbounded = newSettings.getSetting(UNBOUNDED_SETTING);
-        Setting<Double> range = newSettings.getSetting(RANGE_SETTING);
-        Setting<Color> choice = newSettings.getSetting(CHOICE_SETTING);
-        Setting<File> file = newSettings.getSetting(FILE_SETTING);
-        Setting<HashSet<Locale>> multiselect = newSettings.getSetting(MULTISELECT_SETTING);
+        final Setting<String> unbounded = newSettings.getSetting(UNBOUNDED_SETTING);
+        final Setting<Double> range = newSettings.getSetting(RANGE_SETTING);
+        final Setting<Color> choice = newSettings.getSetting(CHOICE_SETTING);
+        final Setting<File> file = newSettings.getSetting(FILE_SETTING);
+        final Setting<Set<Locale>> multiselect = newSettings.getSetting(MULTISELECT_SETTING);
 
         // verify
         assertThat(unbounded.getValue(), equalTo("New String"));
@@ -230,57 +225,13 @@ public class SettingsIT {
         assertThat(multiselect.getValue(), containsInAnyOrder(Locale.GERMANY, Locale.ENGLISH));
     }
 
-    private void fillSettings(Settings settings) {
-        UnboundedSettingBuilder<String> usBuilder = new UnboundedSettingBuilder<>();
-        UnboundedSetting<String> setting1 = usBuilder
-                .forType(String.class)
-                .defaultValue("Default Value")
-                .withHelpMessage(HELP_MESSAGE)
-                .build();
-        settings.addUnboundedSetting(UNBOUNDED_SETTING, setting1);
-
-        RangeSettingBuilder<Double> rsBuilder = new RangeSettingBuilder<>();
-        RangeSetting<Double> setting2 = rsBuilder
-                .forType(Double.class)
-                .defaultValue(1.0)
-                .lowerBound(0.0)
-                .upperBound(2.0)
-                .withHelpMessage(HELP_MESSAGE)
-                .build();
-        settings.addRangeSetting(RANGE_SETTING, setting2);
-
-        ChoiceSettingBuilder<Color> csBuilder = new ChoiceSettingBuilder<>();
-        ChoiceSetting<Color> setting3 = csBuilder
-                .forType(Color.class)
-                .defaultValue(Color.BLACK)
-                .addChoices(Color.RED, Color.GREEN, Color.BLUE)
-                .withHelpMessage(HELP_MESSAGE)
-                .build();
-        settings.addChoiceSetting(CHOICE_SETTING, setting3);
-
-        FileSettingBuilder fsBuilder = new FileSettingBuilder();
-        FileSetting setting4 = fsBuilder
-                .defaultValue(DEFAULT_FILE)
-                .withHelpMessage(HELP_MESSAGE)
-                .build();
-        settings.addFileSetting(FILE_SETTING, setting4);
-
-        MultiselectSettingBuilder<Locale> msBuilder = new MultiselectSettingBuilder<>();
-        MultiselectSetting<Locale> setting5 = msBuilder
-                .defaultValue(Locale.GERMANY, Locale.ENGLISH)
-                .addChoices(Locale.CANADA, Locale.CHINA)
-                .withHelpMessage(HELP_MESSAGE)
-                .build();
-        settings.addMultiselectSetting(MULTISELECT_SETTING, setting5);
-    }
-
     @Test
     public void canFetchHelpMessages() throws Exception {
         // setup
         fillSettings(testObject);
 
         // execute
-        String help = testObject.getChoiceSetting(CHOICE_SETTING).getSetting().getHelpMessage();
+        final String help = testObject.getChoiceSetting(CHOICE_SETTING).getSetting().getHelpMessage();
 
         // verify
         assertThat(help, equalTo(HELP_MESSAGE));

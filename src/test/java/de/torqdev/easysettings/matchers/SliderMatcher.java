@@ -13,8 +13,8 @@ import static org.testfx.matcher.base.GeneralMatchers.typeSafeMatcher;
  */
 public final class SliderMatcher {
     @Factory
-    public static Matcher<Node> fromTo(Double min, Double max) {
-        String descriptionText = "goes from " + min + " to " + max;
+    public static Matcher<Node> fromTo(final Double min, final Double max) {
+        final String descriptionText = "goes from " + min + " to " + max;
         return typeSafeMatcher(Slider.class, descriptionText,
                                node -> min.equals(node.getMin())
                                        && max.equals(node.getMax())
@@ -22,8 +22,8 @@ public final class SliderMatcher {
     }
 
     @Factory
-    public static Matcher<Node> hasSelectedValue(Double value) {
-        String descriptionText = "has selected value " + value;
+    public static Matcher<Node> hasSelectedValue(final Double value) {
+        final String descriptionText = "has selected value " + value;
         return typeSafeMatcher(Slider.class, descriptionText,
                                node -> value.equals(node.getValue())
         );

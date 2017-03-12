@@ -11,6 +11,7 @@ import org.junit.Test;
 import java.io.File;
 import java.util.*;
 
+import static de.torqdev.easysettings.core.SettingsTestUtil.*;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
 
@@ -22,24 +23,16 @@ public class PropertiesFileHandlerTest {
     private static final File PROPERTIES_FILE = new File(
             PropertiesFileHandlerTest.class
                     .getClassLoader()
-                    .getResource("properties/integration-test.properties")
+                    .getResource("properties/settings-test.properties")
                     .getFile()
     );
-    private static final String UNBOUNDED_SETTING = "Unbounded Setting";
-    private static final String HELP_MESSAGE = "Help Message";
-    private static final String DEFAULT_VALUE = "Default Value";
-    private static final String CHOICE_SETTING = "Choice Setting";
-    private static final String RANGE_SETTING = "Range Setting";
-    private static final String MULTISELECT_SETTING = "Multiselect Setting";
-    private static final String FILE_SETTING = "File Setting";
-    private static final File DEFAULT_FILE = new File(System.getProperty("java.io.tmpdir") + "file");
 
     private Settings settings;
     private PropertiesHandler handler;
 
     @BeforeClass
-    public static void registerHashMapStringConverter() {
-        StringConverterUtil.registerStringConverter(new HashSet<Locale>().getClass(), new SetStringConverter<>(Locale.class));
+    public static void registerSetStringConverter() {
+        StringConverterUtil.registerStringConverter(Set.class, new SetStringConverter<>(Locale.class));
     }
 
     @Before
@@ -101,7 +94,8 @@ public class PropertiesFileHandlerTest {
     @Test
     public void canStoreAndLoadMultiselectSettingFromFile() throws Exception {
         // setup
-        HashSet<Locale> newSet = new HashSet<Locale>(Collections.singletonList(Locale.GERMANY));
+        final Set<Locale> oldSet = new HashSet<>(Arrays.asList(Locale.GERMANY, Locale.ENGLISH));
+        final Set<Locale> newSet = new HashSet<>(Collections.singletonList(Locale.GERMANY));
 
         // execute
         settings.save();
@@ -110,9 +104,7 @@ public class PropertiesFileHandlerTest {
         // verify
         assertThat(settings.getMultiselectSetting(MULTISELECT_SETTING).getValue(), equalTo(newSet));
         settings.load();
-        assertThat(settings.getMultiselectSetting(MULTISELECT_SETTING).getValue(), equalTo(
-                new HashSet<Locale>(Arrays.asList(Locale.GERMANY, Locale.ENGLISH)))
-        );
+        assertThat(settings.getMultiselectSetting(MULTISELECT_SETTING).getValue(), equalTo(oldSet));
     }
 
     @Test(expected = EasySettingsException.class)
@@ -133,49 +125,5 @@ public class PropertiesFileHandlerTest {
 
         // execute
         settings.save();
-    }
-
-    private void fillSettings(Settings settings) {
-        UnboundedSettingBuilder<String> usBuilder = new UnboundedSettingBuilder<>();
-        UnboundedSetting<String> setting1 = usBuilder
-                .forType(String.class)
-                .defaultValue("Default Value")
-                .withHelpMessage(HELP_MESSAGE)
-                .build();
-        settings.addUnboundedSetting(UNBOUNDED_SETTING, setting1);
-
-        RangeSettingBuilder<Double> rsBuilder = new RangeSettingBuilder<>();
-        RangeSetting<Double> setting2 = rsBuilder
-                .forType(Double.class)
-                .defaultValue(1.0)
-                .lowerBound(0.0)
-                .upperBound(2.0)
-                .withHelpMessage(HELP_MESSAGE)
-                .build();
-        settings.addRangeSetting(RANGE_SETTING, setting2);
-
-        ChoiceSettingBuilder<Color> csBuilder = new ChoiceSettingBuilder<>();
-        ChoiceSetting<Color> setting3 = csBuilder
-                .forType(Color.class)
-                .defaultValue(Color.BLACK)
-                .addChoices(Color.RED, Color.GREEN, Color.BLUE)
-                .withHelpMessage(HELP_MESSAGE)
-                .build();
-        settings.addChoiceSetting(CHOICE_SETTING, setting3);
-
-        FileSettingBuilder fsBuilder = new FileSettingBuilder();
-        FileSetting setting4 = fsBuilder
-                .defaultValue(DEFAULT_FILE)
-                .withHelpMessage(HELP_MESSAGE)
-                .build();
-        settings.addFileSetting(FILE_SETTING, setting4);
-
-        MultiselectSettingBuilder<Locale> msBuilder = new MultiselectSettingBuilder<>();
-        MultiselectSetting<Locale> setting5 = msBuilder
-                .defaultValue(Locale.GERMANY, Locale.ENGLISH)
-                .addChoices(Locale.CANADA, Locale.CHINA)
-                .withHelpMessage(HELP_MESSAGE)
-                .build();
-        settings.addMultiselectSetting(MULTISELECT_SETTING, setting5);
     }
 }

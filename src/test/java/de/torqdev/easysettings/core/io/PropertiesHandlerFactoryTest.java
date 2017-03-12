@@ -18,7 +18,7 @@ public class PropertiesHandlerFactoryTest {
     @Test
     public void returnsAValidHandlerForNonXmlFiles() throws Exception {
         // execute
-        PropertiesHandler handler = PropertiesHandlerFactory.getHandlerFor(new File("file.csv"));
+        final PropertiesHandler handler = PropertiesHandlerFactory.getHandlerFor(new File("file.csv"));
 
         // verify
         assertEquals(handler.getClass(), PropertiesFileHandler.class);
@@ -27,7 +27,7 @@ public class PropertiesHandlerFactoryTest {
     @Test
     public void returnsNullForXmlFilesForNow() throws Exception {
         // execute
-        PropertiesHandler handler = PropertiesHandlerFactory.getHandlerFor(new File("file.xml"));
+        final PropertiesHandler handler = PropertiesHandlerFactory.getHandlerFor(new File("file.xml"));
 
         // verify
         assertNull(handler);
@@ -35,7 +35,7 @@ public class PropertiesHandlerFactoryTest {
 
     @Test
     public void coverPrivateConstructor() throws Exception {
-        Constructor<?> constructor  = PropertiesHandlerFactory.class.getDeclaredConstructor();
+        final Constructor<?> constructor  = PropertiesHandlerFactory.class.getDeclaredConstructor();
         assertTrue(Modifier.isPrivate(constructor.getModifiers()));
         constructor.setAccessible(true);
         constructor.newInstance();
