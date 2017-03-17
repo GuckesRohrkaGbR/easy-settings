@@ -25,7 +25,7 @@ import java.util.concurrent.ConcurrentHashMap;
  * @author Christopher Guckes (christopher.guckes@torq-dev.de)
  * @version 1.0
  */
-//FIXME: Do the clean code dance
+//REFACTORME: Do the clean code dance
 @SuppressWarnings("unchecked")
 public class ConfigurationDialog extends Dialog<Settings> {
     private static final ResourceBundle STR = ResourceBundle.getBundle("i18n.EasySettings", Locale.getDefault());
@@ -97,11 +97,7 @@ public class ConfigurationDialog extends Dialog<Settings> {
                 break;
             default:
                 final TextField textField = (TextField) valueNode;
-                settings
-                        .getUnboundedSetting(key)
-                        .setValue(
-                                textField.getText()
-                        );
+                settings.getUnboundedSetting(key).setValue(textField.getText());
         }
     }
 
@@ -190,12 +186,12 @@ public class ConfigurationDialog extends Dialog<Settings> {
     }
 
     private void addRangeSetting(final String key, final GridPane grid) {
-        final RangeSetting setting = settings.getRangeSetting(key);
+        final RangeSetting<Number> setting = settings.getRangeSetting(key);
         final Label label = new Label(key);
 
         final Number min = setting.getMin();
         final Number max = setting.getMax();
-        final Number current = (Number) setting.getValue();
+        final Number current = setting.getValue();
 
         final Slider slider = new Slider(min.doubleValue(), max.doubleValue(), current.doubleValue());
         inputFields.put(key, slider);
