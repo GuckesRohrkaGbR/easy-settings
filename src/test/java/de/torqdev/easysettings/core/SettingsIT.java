@@ -75,7 +75,6 @@ public class SettingsIT {
                 .forType(Color.class)
                 .defaultValue(Color.BLACK)
                 .addChoices(Color.RED, Color.GREEN, Color.BLUE)
-                .withHelpMessage(HELP_MESSAGE)
                 .build();
 
         // execute

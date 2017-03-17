@@ -190,18 +190,18 @@ public class ConfigurationDialogTest extends ApplicationTest {
 
     @Test
     public void settingsArePresentedInTheRightOrder() throws Exception {
-        final LinkedList<String> labelTexts = getLabelTextsInOrder();
+        final LinkedList<Label> labels = getLabelsInOrder();
 
-        assertEquals(4, labelTexts.size());
-        assertThat(labelTexts.get(0), containsString(UNBOUNDED_SETTING));
-        assertThat(labelTexts.get(1), containsString(RANGE_SETTING));
-        assertThat(labelTexts.get(2), containsString(CHOICE_SETTING));
-        assertThat(labelTexts.get(3), containsString(FILE_SETTING));
+        assertEquals(4, labels.size());
+        assertThat(labels.get(0).getText(), containsString(UNBOUNDED_SETTING));
+        assertThat(labels.get(1).getText(), containsString(RANGE_SETTING));
+        assertThat(labels.get(2).getText(), containsString(CHOICE_SETTING));
+        assertThat(labels.get(3).getText(), containsString(FILE_SETTING));
     }
 
     @Contract("-> !null")
-    private LinkedList<String> getLabelTextsInOrder() {
-        final LinkedList<String> myReturn = new LinkedList<>();
+    private LinkedList<Label> getLabelsInOrder() {
+        final LinkedList<Label> myReturn = new LinkedList<>();
 
         final int[] idx = {0};
         testObject
@@ -210,7 +210,7 @@ public class ConfigurationDialogTest extends ApplicationTest {
                 .forEach(
                         node -> ((Parent) node).getChildrenUnmodifiable().forEach(node1 -> {
                             if (node1 instanceof Label) {
-                                myReturn.add(idx[0], ((Label) node1).getText());
+                                myReturn.add(idx[0], (Label) node1);
                                 idx[0]++;
                             }
                         }));
@@ -312,44 +312,7 @@ public class ConfigurationDialogTest extends ApplicationTest {
         resultSettings.save();
     }
 
-    @Test
-    public void multiselectSettingsAreDisplayedCorrectly() throws Exception {
-        //TODO
-        // setup
-
-        // execute
-
-        // verify
-
-        // restore
-    }
-
-    @Test
-    public void savingMultiselectSettingsWorks() throws Exception {
-        //TODO
-        // setup
-
-        // execute
-
-        // verify
-
-        // restore
-    }
-
-    @Test
-    public void tooltipsArePresentForSettingsWithHelpMessages() throws Exception {
-        //TODO
-        // setup
-
-        // execute
-
-        // verify
-
-        // restore
-    }
-
     private void checkResultSettingsValidity() {
-        assertThat(resultSettings, notNullValue());
         assertThat(resultSettings, notNullValue());
     }
 }

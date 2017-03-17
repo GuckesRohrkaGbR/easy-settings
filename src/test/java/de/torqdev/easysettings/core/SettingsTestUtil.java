@@ -24,7 +24,6 @@ public final class SettingsTestUtil {
         final UnboundedSetting<String> setting1 = usBuilder
                 .forType(String.class)
                 .defaultValue("Default Value")
-                .withHelpMessage(HELP_MESSAGE)
                 .build();
 
         final RangeSettingBuilder<Double> rsBuilder = new RangeSettingBuilder<>();

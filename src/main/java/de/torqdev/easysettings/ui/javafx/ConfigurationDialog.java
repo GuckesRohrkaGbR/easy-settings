@@ -64,7 +64,7 @@ public class ConfigurationDialog extends Dialog<Settings> {
 
     @Contract("-> !null")
     private Settings updateSettings() {
-        Settings myReturn;
+        final Settings myReturn;
 
         final Map<String, SettingType> types = settings.getSettingTypes();
         types.keySet().forEach(this::updateSetting);
@@ -143,6 +143,10 @@ public class ConfigurationDialog extends Dialog<Settings> {
         final StringConverter converter = StringConverterUtil.getConverter(setting.getSetting().getValueType());
         final Label label = new Label(key);
         final TextField field = new TextField(converter.toString(setting.getValue()));
+
+        addToolTipIfPresent(label, setting.getSetting());
+        addToolTipIfPresent(field, setting.getSetting());
+
         inputFields.put(key, field);
 
         addRow(grid, label, field);
@@ -166,6 +170,8 @@ public class ConfigurationDialog extends Dialog<Settings> {
         });
 
         hbox.getChildren().addAll(fileLabel, openFileButton);
+        addToolTipIfPresent(hbox, setting.getSetting());
+
         addRow(grid, label, hbox);
     }
 
@@ -178,6 +184,8 @@ public class ConfigurationDialog extends Dialog<Settings> {
         choiceBox.getItems().addAll(setting.getChoices());
         choiceBox.setValue(setting.getValue());
 
+        addToolTipIfPresent(label, setting.getSetting());
+        addToolTipIfPresent(choiceBox, setting.getSetting());
         addRow(grid, label, choiceBox);
     }
 
@@ -198,6 +206,7 @@ public class ConfigurationDialog extends Dialog<Settings> {
         final HBox hbox = new HBox(5);
 
         hbox.getChildren().addAll(slider, valueLabel);
+        addToolTipIfPresent(hbox, setting.getSetting());
 
         addRow(grid, label, hbox);
     }
@@ -208,8 +217,8 @@ public class ConfigurationDialog extends Dialog<Settings> {
 
     private int getNextAvailableRow(final GridPane grid) {
         // Thats what happens when you make functions private that should be public.
-        int myReturn;
-        Method method;
+        final int myReturn;
+        final Method method;
         try {
             method = grid.getClass().getDeclaredMethod("getNumberOfRows");
             method.setAccessible(true);
@@ -221,9 +230,9 @@ public class ConfigurationDialog extends Dialog<Settings> {
     }
 
     private void addToolTipIfPresent(final Node myReturn, final Setting<?> setting) {
-//        if (!setting.getHelpMessage().isEmpty()) {
-//            final Tooltip tooltip = new Tooltip(setting.getHelpMessage());
-//            Tooltip.install(myReturn, tooltip);
-//        }
+        if (!setting.getHelpMessage().isEmpty()) {
+            final Tooltip tooltip = new Tooltip(setting.getHelpMessage());
+            Tooltip.install(myReturn, tooltip);
+        }
     }
 }
