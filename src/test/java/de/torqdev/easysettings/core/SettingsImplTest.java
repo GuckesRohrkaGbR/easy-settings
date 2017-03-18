@@ -14,7 +14,7 @@ public class SettingsImplTest extends SettingsTest {
     private static final File PROPERTIES_FILE = new File(
             SettingsIT.class
                     .getClassLoader()
-                    .getResource("properties/settings-impl-test.properties")
+                    .getResource("properties/settings-test.properties")
                     .getFile()
     );
     private static final PropertiesHandler HANDLER = new PropertiesFileHandler(PROPERTIES_FILE);

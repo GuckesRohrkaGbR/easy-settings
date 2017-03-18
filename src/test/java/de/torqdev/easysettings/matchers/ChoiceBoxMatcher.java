@@ -15,23 +15,23 @@ import static org.testfx.matcher.base.GeneralMatchers.typeSafeMatcher;
 public final class ChoiceBoxMatcher {
     @NotNull
     @Factory
-    public static Matcher<Node> hasItems(int amount) {
-        String descriptionText = "has " + amount + " items";
+    public static Matcher<Node> hasItems(final int amount) {
+        final String descriptionText = "has " + amount + " items";
         return typeSafeMatcher(ChoiceBox.class, descriptionText, node -> hasItems(node, amount));
     }
 
     @NotNull
     @Factory
-    public static <T> Matcher<Node> hasSelectedItem(T selection) {
-        String descriptionText = "has selection " + selection;
+    public static <T> Matcher<Node> hasSelectedItem(final T selection) {
+        final String descriptionText = "has selection " + selection;
         return typeSafeMatcher(ChoiceBox.class, descriptionText, node -> hasSelectedItem(node, selection));
     }
 
-    private static boolean hasItems(ChoiceBox<?> choiceBox, int amount) {
+    private static boolean hasItems(final ChoiceBox<?> choiceBox, final int amount) {
         return choiceBox.getItems().size() == amount;
     }
 
-    private static <T> boolean hasSelectedItem(ChoiceBox<?> choiceBox, T selection) {
+    private static <T> boolean hasSelectedItem(final ChoiceBox<?> choiceBox, final T selection) {
         return selection.equals(choiceBox.valueProperty().get());
     }
 }

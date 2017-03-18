@@ -20,7 +20,7 @@ public final class ButtonMatcher {
     }
 
     @Factory
-    public static Matcher<Node> isLabeled(String label) {
+    public static Matcher<Node> isLabeled(final String label) {
         return typeSafeMatcher(Button.class, "is labeled " + label,
                                button -> label.equals(button.getText()));
     }

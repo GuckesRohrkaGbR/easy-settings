@@ -18,10 +18,11 @@ public class ChoiceSettingTest {
     @Test
     public void choicesContainDefaultValue() throws Exception {
         // setup
-        ChoiceSetting<Color> setting = new ChoiceSetting<>(Color.BLACK, Color.class, new HashSet<>(Arrays.asList(Color.BLUE, Color.RED, Color.GREEN)), null);
+        final ChoiceSetting<Color> setting = new ChoiceSetting<>(Color.BLACK, Color.class,
+                new HashSet<>(Arrays.asList(Color.BLUE, Color.RED, Color.GREEN)), null);
 
         // execute
-        Set<Color> choices = setting.getChoices();
+        final Set<Color> choices = setting.getChoices();
 
         // verify
         assertThat(choices, containsInAnyOrder(Color.BLACK, Color.BLUE, Color.RED, Color.GREEN));

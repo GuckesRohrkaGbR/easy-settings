@@ -14,7 +14,6 @@ import java.util.stream.Collectors;
 public class SetStringConverter<T> extends StringConverter<Set<T>> {
     private final StringConverter<T> converter;
 
-
     public SetStringConverter(final Class<T> type) {
         this.converter = StringConverterUtil.getConverter(type);
     }
@@ -26,16 +25,16 @@ public class SetStringConverter<T> extends StringConverter<Set<T>> {
 
     @Override
     public Set<T> fromString(final String stringSet) {
-        final Set<T> hashSet = new HashSet<>();
+        final Set<T> myReturn = new HashSet<>();
         if(stringSet != null) {
             final String set = sanitize(stringSet);
             Arrays.stream(set.split(","))
                     .map(String::trim)
                     .map(converter::fromString)
-                    .forEach(hashSet::add);
+                    .forEach(myReturn::add);
         }
 
-        return hashSet;
+        return myReturn;
     }
 
     private String sanitize(final String stringSet) {
