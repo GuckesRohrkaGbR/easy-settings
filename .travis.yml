@@ -2,8 +2,8 @@ language: java
 jdk:
 - oraclejdk8
 script:
-- mvn test
-- mvn clean org.jacoco:jacoco-maven-plugin:prepare-agent package verify sonar:sonar -Dsonar.login=$SONAR_TOKEN
+- mvn test -Dgpg.skip
+- mvn clean org.jacoco:jacoco-maven-plugin:prepare-agent package verify sonar:sonar -Dgpg.skip -Dsonar.login=$SONAR_TOKEN
 addons:
   sonarqube: true
   apt:
