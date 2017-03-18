@@ -3,7 +3,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>de.torqdev</groupId>
     <artifactId>easysettings</artifactId>
-    <version>1.0.0</version>
+    <version>1.0.1-SNAPSHOT</version>
 
     <issueManagement>
         <url>https://github.com/guckesrohrkagbr/easy-settings/issues</url>
@@ -26,7 +26,7 @@
         <url>https://github.com/guckesrohrkagbr/easy-settings</url>
         <connection>scm:git:git://github.com/guckesrohrkagbr/easy-settings.git</connection>
         <developerConnection>scm:git:git@github.com:guckesrohrkagbr/easy-settings.git</developerConnection>
-      <tag>easysettings-1.0.0</tag>
+      <tag>HEAD</tag>
   </scm>
 
     <developers>
