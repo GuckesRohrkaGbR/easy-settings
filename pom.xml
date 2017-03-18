@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>de.torqdev</groupId>
     <artifactId>easysettings</artifactId>
-    <version>1.0.0-RC1</version>
+    <version>1.0.0-SNAPSHOT</version>
 
     <issueManagement>
         <url>https://github.com/guckesrohrkagbr/easy-settings/issues</url>
@@ -115,7 +115,9 @@
                 <artifactId>maven-surefire-plugin</artifactId>
                 <version>2.19.1</version>
                 <configuration>
-                    <argLine>${argLine} -Djava.awt.headless=true -Dtestfx.robot=glass -Dtestfx.headless=true -Dprism.order=sw</argLine>
+                    <argLine>${argLine} -Djava.awt.headless=true -Dtestfx.robot=glass -Dtestfx.headless=true
+                        -Dprism.order=sw
+                    </argLine>
                 </configuration>
             </plugin>
             <plugin>
@@ -233,6 +235,17 @@
                     <serverId>ossrh</serverId>
                     <nexusUrl>https://oss.sonatype.org/</nexusUrl>
                     <autoReleaseAfterClose>true</autoReleaseAfterClose>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-release-plugin</artifactId>
+                <version>2.5.3</version>
+                <configuration>
+                    <autoVersionSubmodules>true</autoVersionSubmodules>
+                    <useReleaseProfile>false</useReleaseProfile>
+                    <releaseProfiles>release</releaseProfiles>
+                    <goals>deploy</goals>
                 </configuration>
             </plugin>
         </plugins>
